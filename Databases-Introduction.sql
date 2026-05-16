@@ -74,8 +74,15 @@ ALTER TABLE [Users]
 ADD CONSTRAINT [DF_LastLoginTime_Now] DEFAULT(GETDATE()) FOR [LastLoginTime]
 
 -- 12
+ALTER TABLE [Users]
+DROP CONSTRAINT [PK_Users_Id_Name]
+ALTER TABLE [Users]
+ADD CONSTRAINT [PK_Users_Id] PRIMARY KEY([Id])
+ALTER TABLE [Users]
+ADD CONSTRAINT [UQ_Users_Name] UNIQUE([Name])
 
 -- 13
+
 
 -- 14
 
@@ -84,3 +91,10 @@ ADD CONSTRAINT [DF_LastLoginTime_Now] DEFAULT(GETDATE()) FOR [LastLoginTime]
 -- 16
 
 -- 17
+
+-- 18
+
+-- 19
+SELECT * FROM [Towns]
+SELECT * FROM [Departments]
+SELECT * FROM [Employees]
