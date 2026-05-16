@@ -95,6 +95,21 @@ ADD CONSTRAINT [UQ_Users_Name] UNIQUE([Name])
 -- 18
 
 -- 19
-SELECT * FROM [Towns]
-SELECT * FROM [Departments]
-SELECT * FROM [Employees]
+SELECT * 
+  FROM [Towns]
+
+SELECT * 
+  FROM [Departments]
+
+SELECT * 
+  FROM [Employees]
+
+-- 20
+
+-- 21
+
+-- 22
+
+-- 23
+
+-- 24
