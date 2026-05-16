@@ -10,7 +10,6 @@ CREATE TABLE [Minions]
 	[Name] VARCHAR(50) NOT NULL,
 	[Age] TINYINT 
 );
-
 CREATE TABLE [Towns]
 (
 	[Id] INT PRIMARY KEY,
@@ -22,3 +21,4 @@ CREATE TABLE [Towns]
 ALTER TABLE [Minions]
 ADD [TownId] INT FOREIGN KEY REFERENCES [Towns]([Id]) NOT NULL
 
+-- 4
