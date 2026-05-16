@@ -70,6 +70,8 @@ ALTER TABLE [Users]
 ADD CONSTRAINT [CK_Password_Min_Length_5] CHECK(LEN([Password]) >= 5)
 
 -- 11
+ALTER TABLE [Users]
+ADD CONSTRAINT [DF_LastLoginTime_Now] DEFAULT(GETDATE()) FOR [LastLoginTime]
 
 -- 12
 
