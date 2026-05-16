@@ -49,7 +49,6 @@ CREATE TABLE [Users]
 	[LastLoginTime] DATETIME2,
 	[IsDeleted] BIT NOT NULL
 );
-
 INSERT INTO [Users] ([Name], [Password], [ProfilePicture], [LastLoginTime], [IsDeleted]) 
 VALUES
 ('martin', 'Pass1234!', 0xFFD8FFE0, '2026-05-16 10:15:00', 0),
@@ -58,9 +57,10 @@ VALUES
 ('john', 'SecurePass_99', 0x25504446, '2026-05-10 22:30:00', 1),
 ('emily', 'AlphaBetaGamma12', 0x424D36, '2026-05-12 14:20:00', 0);
 
-
-
 -- 9
+ALTER TABLE [Users]
+DROP CONSTRAINT [PK__Users__3214EC079DE7B8BC]
+
 
 -- 10
 
