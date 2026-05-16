@@ -50,6 +50,16 @@ CREATE TABLE [Users]
 	[IsDeleted] BIT NOT NULL
 );
 
+INSERT INTO [Users] ([Name], [Password], [ProfilePicture], [LastLoginTime], [IsDeleted]) 
+VALUES
+('martin', 'Pass1234!', 0xFFD8FFE0, '2026-05-16 10:15:00', 0),
+('alex', 'Qwerty2026$', 0x89504E47, '2026-05-15 18:40:00', 0),
+('sara', 'MySecretKey#1', 0x47494638, '2026-05-14 09:05:00', 0),
+('john', 'SecurePass_99', 0x25504446, '2026-05-10 22:30:00', 1),
+('emily', 'AlphaBetaGamma12', 0x424D36, '2026-05-12 14:20:00', 0);
+
+
+
 -- 9
 
 -- 10
