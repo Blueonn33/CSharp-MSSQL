@@ -97,10 +97,8 @@ ADD CONSTRAINT [UQ_Users_Name] UNIQUE([Name])
 -- 19
 SELECT * 
   FROM [Towns]
-
 SELECT * 
   FROM [Departments]
-
 SELECT * 
   FROM [Employees]
 
@@ -108,11 +106,9 @@ SELECT *
   SELECT * 
     FROM [Towns]
 ORDER BY [Name]
-
   SELECT * 
     FROM [Departments]
 ORDER BY [Name]
-
   SELECT * 
     FROM [Employees]
 ORDER BY [Salary]
@@ -122,11 +118,9 @@ ORDER BY [Salary]
   SELECT [Name] 
     FROM [Towns]
 ORDER BY [Name]
-
   SELECT [Name] 
     FROM [Departments]
 ORDER BY [Name]
-
   SELECT [FirstName],
 		 [LastName],
 		 [JobTitle],
@@ -136,6 +130,17 @@ ORDER BY [Salary]
 	DESC
 
 -- 22
+/* ALTER VS UPDATE
+	1. ALTER - Used for changing the structure of the tables
+	and other DB objects (TABLE, COLUMN, DataType, CONSTRAINT)
+
+	2. UPDATE - Used for updating the value for defined column
+	for defined (ALL) rows. (Row, Entities in TABLE)
+	Note: UPDATE changes the data inside the table, while
+	ALTER changes the rules for the data in the database
+*/
+
+
 
 -- 23
 
