@@ -140,7 +140,14 @@ ORDER BY [Salary]
 	ALTER changes the rules for the data in the database
 */
 
+-- Salary + 10% <=> Salary + (Salary * 10/100)
+-- <=> Salary += Salary * 0.1
 
+UPDATE [Employees]
+   SET [Salary] += ([Salary] * 0.1)
+
+SELECT [Salary]
+  FROM [Employees]
 
 -- 23
 
