@@ -105,6 +105,15 @@ SELECT *
   FROM [Employees]
 
 -- 20
+  SELECT * 
+    FROM [Towns]
+ORDER BY [Name]
+
+SELECT * 
+  FROM [Departments]
+
+SELECT * 
+  FROM [Employees]
 
 -- 21
 
