@@ -113,9 +113,10 @@ ORDER BY [Name]
     FROM [Departments]
 ORDER BY [Name]
 
-	   SELECT * 
-         FROM [Employees]
-ORDER BY DESC [Salary]
+  SELECT * 
+    FROM [Employees]
+ORDER BY [Salary]
+	DESC
 
 -- 21
 
