@@ -59,12 +59,15 @@ VALUES
 
 -- 9
 ALTER TABLE [Users]
-DROP CONSTRAINT [PK__Users__3214EC079DE7B8BC]
+DROP CONSTRAINT [PK__Users__5523B448D1C603DF]
 
+--Composite Primary key: Unique Combination of several columns forming PK
 ALTER TABLE	[Users]
-ADD PRIMARY KEY([Id], [Name])
+ADD CONSTRAINT [PK_Users_Id_Name] PRIMARY KEY([Id], [Name])
 
 -- 10
+ALTER TABLE [Users]
+ADD CONSTRAINT [CK_Password_Min_Length_5] CHECK(LEN([Password]) >= 5)
 
 -- 11
 
