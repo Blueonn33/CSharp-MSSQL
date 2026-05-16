@@ -35,3 +35,11 @@ VALUES (1, 'Kevin', 22, 1),
 -- 5
 
 TRUNCATE TABLE [Minions]
+
+-- 6 
+
+DROP TABLE [Minions]
+DROP TABLE [Towns]
+
+
+-- 7 
