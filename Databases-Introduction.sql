@@ -393,6 +393,7 @@ INSERT INTO Occupancies (Id, EmployeeId, DateOccupied, AccountNumber, RoomNumber
 
 -- 16
 
+
 -- 17
 
 -- 18
@@ -453,5 +454,13 @@ SELECT [Salary]
   FROM [Employees]
 
 -- 23
+/*
+decrease tax rate by 3% to all payments. Then select only TaxRate column from the Payments table
+*/
 
+UPDATE [Payments]
+	SET [TaxRate] -= ([TaxRate] * 0.03)
+
+SELECT [TaxRate]
+	FROM [Payments]
 -- 24
