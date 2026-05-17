@@ -8,7 +8,5 @@ SELECT DISTINCT
 	DepartmentID 
 FROM Employees
 
--- Highest Peek
+-- Highest Peak - 1
 SELECT * FROM v_HighestPeak
-
-
