@@ -171,6 +171,105 @@ VALUES
 ('The Lord of the Rings: The Fellowship of the Ring', 5, '2001-01-01', 178, 5, 5, 10, 'Epic fantasy adventure.');
 
 -- 14
+CREATE DATABASE [CarRental]
+
+CREATE TABLE [Categories]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[CategoryName] NVARCHAR(60) NOT NULL,
+	[DailyRate] DECIMAL NOT NULL,
+	[WeeklyRate] DECIMAL NOT NULL,
+	[MonthlyRate] DECIMAL NOT NULL,
+	[WeekendRate] DECIMAL NOT NULL
+);
+
+CREATE TABLE [Cars]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[PlateNumber] NVARCHAR(20) UNIQUE NOT NULL,
+	[Manufacturer] NVARCHAR(60) NOT NULL,
+	[Model]	NVARCHAR(60) NOT NULL,
+	[CarYear] DATE NOT NULL,
+	[CategoryId] INT FOREIGN KEY REFERENCES [Categories](Id),
+	[Doors] TINYINT NOT NULL,
+	[Picture] VARBINARY(MAX),
+	[Condition] BIT NOT NULL,
+	[Available] BIT NOT NULL
+);
+
+CREATE TABLE [Employees]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[FirstName] NVARCHAR(60) NOT NULL,
+	[LastName] NVARCHAR(60) NOT NULL,
+	[Address] NVARCHAR(100) NOT NULL,
+	[City] NVARCHAR(100) NOT NULL,
+	[ZIPCode] INT NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [Customers]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[DriverLicenseNumber] NVARCHAR(30) UNIQUE NOT NULL,
+	[FullName] NVARCHAR(100) NOT NULL,
+	[Address] NVARCHAR(100) NOT NULL,
+	[City] NVARCHAR(100) NOT NULL,
+	[ZIPCode] INT NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [RentalOrders]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[EmployeeId] INT FOREIGN KEY REFERENCES [Employees](Id),
+	[CustomerId] INT FOREIGN KEY REFERENCES [Customers](Id),
+	[CarId] INT FOREIGN KEY REFERENCES [Cars](Id),
+	[TankLevel] TINYINT NOT NULL,
+	[KilometrageStart] DECIMAL NOT NULL,
+	[KilometrageEnd] DECIMAL NOT NULL,
+	[TotalKilometrage] DECIMAL NOT NULL,
+	[StartDate] DATE NOT NULL,
+	[EndDate] DATE NOT NULL,
+	[TotalDays] DATE NOT NULL,
+	[RateApplied] DECIMAL NOT NULL,
+	[TaxRate] DECIMAL NOT NULL,
+	[OrderStatus] BIT NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+INSERT INTO Categories (CategoryName, DailyRate, WeeklyRate, MonthlyRate, WeekendRate)
+VALUES
+('Economy', 25.00, 150.00, 550.00, 40.00),
+('SUV', 45.00, 280.00, 1000.00, 70.00),
+('Luxury', 80.00, 500.00, 1800.00, 120.00);
+
+INSERT INTO Cars (PlateNumber, Manufacturer, Model, CarYear, CategoryId, Doors, Picture, Condition, Available)
+VALUES
+('BT1234AB', 'Toyota', 'Yaris', '2018-01-01', 1, 4, NULL, 1, 1),
+('CT5678AC', 'Honda', 'CR-V', '2020-01-01', 2, 5, NULL, 1, 1),
+('CA9999BB', 'BMW', '530d', '2019-01-01', 3, 4, NULL, 1, 0);
+
+INSERT INTO Employees (FirstName, LastName, Address, City, ZIPCode, Notes)
+VALUES
+('Ivan', 'Petrov', 'Ul. Shipka 12', 'Sofia', 1000, 'Senior employee'),
+('Maria', 'Dimitrova', 'Ul. Vitosha 45', 'Plovdiv', 4000, 'Part-time'),
+('Georgi', 'Nikolov', 'Ul. Dunav 7', 'Varna', 9000, 'New hire');
+
+INSERT INTO Customers (DriverLicenseNumber, FullName, Address, City, ZIPCode, Notes)
+VALUES
+('DL123456', 'Petar Ivanov', 'Ul. Slivnitsa 10', 'Sofia', 1000, 'Regular customer'),
+('DL654321', 'Elena Stoyanova', 'Ul. Trakia 22', 'Burgas', 8000, 'VIP'),
+('DL987654', 'Kiril Georgiev', 'Ul. Ohrid 5', 'Ruse', 7000, 'First rental');
+
+INSERT INTO RentalOrders
+(EmployeeId, CustomerId, CarId, TankLevel, KilometrageStart, KilometrageEnd, TotalKilometrage,
+ StartDate, EndDate, TotalDays, RateApplied, TaxRate, OrderStatus, Notes)
+VALUES
+(1, 1, 1, 80, 15000, 15200, 200, '2024-01-05', '2024-01-07', '2024-01-07', 50.00, 0.20, 1, 'Weekend rental'),
+(2, 2, 2, 90, 30000, 30550, 550, '2024-02-10', '2024-02-17', '2024-02-17', 280.00, 0.20, 1, 'Weekly rental'),
+(3, 3, 3, 60, 50000, 50300, 300, '2024-03-01', '2024-03-05', '2024-03-05', 320.00, 0.20, 0, 'Car returned with scratches');
+
 
 -- 15
 
