@@ -9,9 +9,6 @@ SELECT DISTINCT
 FROM Employees
 
 -- Highest Peek
-
-Select TOP 1 * 
-FROM Peaks
-ORDER BY Elevation DESC
+SELECT * FROM v_HighestPeak
 
 
