@@ -3,3 +3,7 @@ SELECT
 	JobTitle AS "Job Title",
 	Salary
 FROM Employees
+
+SELECT DISTINCT
+	DepartmentID 
+FROM Employees
