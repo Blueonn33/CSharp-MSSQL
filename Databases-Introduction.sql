@@ -463,4 +463,8 @@ UPDATE [Payments]
 
 SELECT [TaxRate]
 	FROM [Payments]
+
 -- 24
+SELECT * FROM [Occupancies]
+
+DELETE FROM [Occupancies]
