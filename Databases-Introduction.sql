@@ -272,6 +272,124 @@ VALUES
 
 
 -- 15
+CREATE DATABASE [Hotel]
+
+CREATE TABLE [Employees]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[FirstName] NVARCHAR(60) NOT NULL,
+	[LastName] NVARCHAR(60) NOT NULL,
+	[Title] NVARCHAR(60) NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [Customers]
+(
+	[AccountNumber] INT PRIMARY KEY,
+	[FirstName] NVARCHAR(60) NOT NULL,
+	[LastName] NVARCHAR(60) NOT NULL,
+	[PhoneNumber] NVARCHAR(20) NOT NULL,
+	[EmergencyName] NVARCHAR(60) NOT NULL,
+	[EmergencyNumber] NVARCHAR(20) NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [RoomStatus]
+(
+	[RoomStatus] BIT NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [RoomTypes]
+(
+	[RoomType] VARCHAR(30) NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [BedTypes]
+(
+	[BedType] VARCHAR(30) NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [Rooms]
+(
+	[RoomNumber] INT UNIQUE NOT NULL,
+	[RoomType] VARCHAR(30) NOT NULL,
+	[BedType] VARCHAR(30) NOT NULL,
+	[Rate] TINYINT NOT NULL,
+	[RoomStatus] BIT NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [Payments]
+(
+	[Id] INT PRIMARY KEY,
+	[EmployeeId] INT FOREIGN KEY REFERENCES [Employees](Id),
+	[PaymentDate] DATETIME2 NOT NULL,
+	[AccountNumber] INT NOT NULL,
+	[FirstDateOccupied] DATETIME2 NOT NULL,
+	[LastDateOccupied] DATETIME2 NOT NULL,
+	[TotalDays] TINYINT NOT NULL,
+	[AmountCharged] DECIMAL NOT NULL,
+	[TaxRate] DECIMAL NOT NULL,
+	[TaxAmount] DECIMAL NOT NULL,
+	[PaymentTotal] DECIMAL NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [Occupancies]
+(
+	[Id] INT PRIMARY KEY NOT NULL,
+	[EmployeeId] INT FOREIGN KEY REFERENCES [Employees](Id),
+	[DateOccupied] DATETIME2 NOT NULL,
+	[AccountNumber] INT NOT NULL,
+	[RoomNumber] INT UNIQUE NOT NULL,
+	[RateApplied] TINYINT NOT NULL,
+	[PhoneCharge] DECIMAL NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+INSERT INTO Employees (FirstName, LastName, Title, Notes) VALUES
+('Ivan', 'Petrov', 'Manager', 'Night shift supervisor'),
+('Maria', 'Georgieva', 'Receptionist', 'Fluent in English and German'),
+('Stoyan', 'Iliev', 'Housekeeping', 'Responsible for 3rd floor');
+
+INSERT INTO Customers (AccountNumber, FirstName, LastName, PhoneNumber, EmergencyName, EmergencyNumber, Notes) VALUES
+(1001, 'Georgi', 'Dimitrov', '0888123456', 'Petar Dimitrov', '0888999000', 'VIP client'),
+(1002, 'Elena', 'Koleva', '0888456789', 'Mariya Koleva', '0888777666', 'Allergic to peanuts'),
+(1003, 'Nikolay', 'Stanev', '0888987654', 'Ivan Stanev', '0888111222', NULL);
+
+INSERT INTO RoomStatus (RoomStatus, Notes) VALUES
+(1, 'Occupied'),
+(0, 'Available'),
+(1, 'Cleaning in progress');
+
+INSERT INTO RoomTypes (RoomType, Notes) VALUES
+('Single', 'One bed'),
+('Double', 'Two beds'),
+('Suite', 'Luxury suite');
+
+INSERT INTO BedTypes (BedType, Notes) VALUES
+('Single Bed', 'Standard single'),
+('Double Bed', 'Standard double'),
+('King Size', 'Large bed');
+
+INSERT INTO Rooms (RoomNumber, RoomType, BedType, Rate, RoomStatus, Notes) VALUES
+(101, 'Single', 'Single Bed', 50, 0, 'Quiet room'),
+(202, 'Double', 'Double Bed', 80, 1, 'Sea view'),
+(303, 'Suite', 'King Size', 150, 0, 'VIP suite');
+
+INSERT INTO Payments (Id, EmployeeId, PaymentDate, AccountNumber, FirstDateOccupied, LastDateOccupied, TotalDays, AmountCharged, TaxRate, TaxAmount, PaymentTotal, Notes) VALUES
+(1, 1, '2024-05-01', 1001, '2024-04-25', '2024-04-28', 3, 300, 0.10, 30, 330, 'Paid in cash'),
+(2, 2, '2024-05-10', 1002, '2024-05-05', '2024-05-07', 2, 160, 0.10, 16, 176, NULL),
+(3, 1, '2024-05-15', 1003, '2024-05-10', '2024-05-14', 4, 600, 0.10, 60, 660, 'Late checkout included');
+
+INSERT INTO Occupancies (Id, EmployeeId, DateOccupied, AccountNumber, RoomNumber, RateApplied, PhoneCharge, Notes) VALUES
+(1, 2, '2024-04-25', 1001, 101, 50, 5.50, 'International call'),
+(2, 1, '2024-05-05', 1002, 202, 80, 0.00, NULL),
+(3, 3, '2024-05-10', 1003, 303, 150, 12.75, 'Room service calls');
+
 
 -- 16
 
