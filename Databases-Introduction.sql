@@ -36,6 +36,29 @@ DROP TABLE [Minions]
 DROP TABLE [Towns]
 
 -- 7 
+CREATE TABLE [People]
+(
+		[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	  [Name] NVARCHAR(200) NOT NULL,
+   [Picture] VARBINARY(MAX) NULL,
+			 CHECK(LEN([Picture]) <= 2097152), -- Up to 2048KB
+	[Height] DECIMAL(3, 2) NULL,
+	[Weight] DECIMAL(5, 2) NULL,
+	[Gender] CHAR(1) NOT NULL,
+			 CHECK([Gender] IN ('m', 'f')),
+  [Birthday] DATE NOT NULL,
+ [Biography] NVARCHAR(MAX) NULL
+);
+
+INSERT INTO People ([Name], [Picture], [Height], [Weight], [Gender], [Birthday], [Biography])
+VALUES
+('Ivan Petrov', NULL, 1.82, 82.50, 'm', '1990-04-12', 'Ivan is a software engineer who loves hiking.'),
+('Maria Georgieva', NULL, 1.67, 58.20, 'f', '1995-09-30', 'Maria is a graphic designer and photographer.'),
+('Georgi Dimitrov', NULL, 1.75, 76.10, 'm', '1988-01-22', 'Georgi works as a fitness trainer.'),
+('Elena Stoyanova', NULL, 1.60, 52.00, 'f', '1992-06-18', 'Elena is a teacher who enjoys reading and traveling.'),
+('Petar Ivanov', NULL, 1.90, 90.30, 'm', '1985-11-05', 'Petar is a musician and plays the guitar.');
+
+SELECT * FROM [People]
 
 -- 8
 -- CHECK Constraint: User-defined rule for the value in a column/s
