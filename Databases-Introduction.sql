@@ -49,7 +49,6 @@ CREATE TABLE [People]
   [Birthday] DATE NOT NULL,
  [Biography] NVARCHAR(MAX) NULL
 );
-
 INSERT INTO People ([Name], [Picture], [Height], [Weight], [Gender], [Birthday], [Biography])
 VALUES
 ('Ivan Petrov', NULL, 1.82, 82.50, 'm', '1990-04-12', 'Ivan is a software engineer who loves hiking.'),
@@ -57,8 +56,6 @@ VALUES
 ('Georgi Dimitrov', NULL, 1.75, 76.10, 'm', '1988-01-22', 'Georgi works as a fitness trainer.'),
 ('Elena Stoyanova', NULL, 1.60, 52.00, 'f', '1992-06-18', 'Elena is a teacher who enjoys reading and traveling.'),
 ('Petar Ivanov', NULL, 1.90, 90.30, 'm', '1985-11-05', 'Petar is a musician and plays the guitar.');
-
-SELECT * FROM [People]
 
 -- 8
 -- CHECK Constraint: User-defined rule for the value in a column/s
@@ -105,7 +102,73 @@ ALTER TABLE [Users]
 ADD CONSTRAINT [UQ_Users_Name] UNIQUE([Name])
 
 -- 13
+CREATE DATABASE [Movies]
 
+CREATE TABLE [Directors]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[DirectorName] NVARCHAR(60) NOT NULL,
+	[Notes]	NVARCHAR(500),
+);
+
+CREATE TABLE [Genres]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[GenreName] NVARCHAR(50) NOT NULL,
+	[Notes] NVARCHAR(500)
+);
+
+CREATE TABLE [Categories]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[CategoryName] NVARCHAR(50) NOT NULL,
+	[Notes]	NVARCHAR(500)
+);
+
+CREATE TABLE [Movies]
+(
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[Title] NVARCHAR(100) NOT NULL,
+	[DirectorId] INT FOREIGN KEY REFERENCES [Directors](Id),
+	[CopyrightYear] DATE NOT NULL,
+	[Length] TINYINT NOT NULL,
+	[GenreId] INT FOREIGN KEY REFERENCES [Genres](Id),
+	[CategoryId] INT FOREIGN KEY REFERENCES [Categories](Id),
+	[Rating] TINYINT,
+	[Notes] NVARCHAR(500)
+);
+
+INSERT INTO Directors (DirectorName, Notes)
+VALUES
+('Steven Spielberg', 'Famous for adventure and sci-fi films.'),
+('Christopher Nolan', 'Known for complex narratives.'),
+('Quentin Tarantino', 'Stylized violence and nonlinear storytelling.'),
+('James Cameron', 'Blockbuster director and innovator.'),
+('Peter Jackson', 'Director of The Lord of the Rings trilogy.');
+
+INSERT INTO Genres (GenreName, Notes)
+VALUES
+('Action', 'High intensity and dynamic scenes.'),
+('Drama', 'Character-driven emotional stories.'),
+('Comedy', 'Light-hearted and humorous.'),
+('Sci-Fi', 'Speculative futuristic concepts.'),
+('Fantasy', 'Magical worlds and mythical elements.');
+
+INSERT INTO Categories (CategoryName, Notes)
+VALUES
+('Blockbuster', 'High-budget mainstream films.'),
+('Indie', 'Independent low-budget productions.'),
+('Classic', 'Older influential films.'),
+('Family', 'Suitable for all ages.'),
+('Award-Winning', 'Recognized by major film awards.');
+
+INSERT INTO Movies (Title, DirectorId, CopyrightYear, Length, GenreId, CategoryId, Rating, Notes)
+VALUES
+('Jurassic Park', 1, '1993-01-01', 127, 1, 1, 9, 'Classic Spielberg adventure.'),
+('Inception', 2, '2010-01-01', 148, 4, 1, 10, 'Mind-bending sci-fi thriller.'),
+('Pulp Fiction', 3, '1994-01-01', 154, 2, 3, 9, 'Cult classic with nonlinear plot.'),
+('Avatar', 4, '2009-01-01', 162, 4, 1, 8, 'Revolutionary visual effects.'),
+('The Lord of the Rings: The Fellowship of the Ring', 5, '2001-01-01', 178, 5, 5, 10, 'Epic fantasy adventure.');
 
 -- 14
 
