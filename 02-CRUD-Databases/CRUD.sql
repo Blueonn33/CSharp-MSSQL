@@ -101,3 +101,9 @@ WHERE Salary BETWEEN 20000 AND 30000
 SELECT CONCAT_WS(' ', FirstName, MiddleName, LastName) 
 AS "Full Name"
 FROM Employees
+
+-- 11
+
+SELECT FirstName, LastName
+FROM Employees
+WHERE ManagerID IS NULL
