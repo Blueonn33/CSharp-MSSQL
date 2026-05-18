@@ -148,6 +148,9 @@ SELECT * FROM V_EmployeesSalaries
 -- 17
 
 CREATE VIEW V_EmployeeNameJobTitle AS
+	UPDATE FROM Employees
+	SET MiddleName = ' '
+	WHERE MiddleName IS NULL
 	SELECT CONCAT_WS(' ', FirstName, MiddleName, LastName)
 		AS "Full Name",
 		JobTitle AS "Job Title"
@@ -159,3 +162,20 @@ SELECT FirstName + ' ' + MiddleName + ' ' + LastName
 		AS "Full Name",
 		JobTitle AS "Job Title"
 	FROM Employees
+
+CREATE VIEW V_EmployeeNameJobTitle AS
+SELECT 
+    CONCAT(
+        FirstName, ' ',
+        ISNULL(MiddleName, ' '), 
+        CASE WHEN MiddleName IS NULL THEN '' ELSE ' ' END,
+        LastName
+    ) AS FullName,
+    JobTitle
+FROM Employees;
+
+
+-- 18
+
+SELECT DISTINCT JobTitle
+FROM Employees
