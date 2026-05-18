@@ -136,3 +136,11 @@ ORDER BY
 	FirstName ASC,
 	LastName DESC,
 	MiddleName ASC
+
+-- 16
+
+CREATE VIEW V_EmployeesSalaries AS
+	SELECT FirstName, LastName, Salary
+	FROM Employees
+
+SELECT * FROM V_EmployeesSalaries
