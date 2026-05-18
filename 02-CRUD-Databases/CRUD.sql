@@ -95,3 +95,9 @@ WHERE JobTitle = 'Sales Representative'
 SELECT FirstName, LastName, JobTitle
 FROM Employees
 WHERE Salary BETWEEN 20000 AND 30000
+
+-- 10
+
+SELECT CONCAT_WS(' ', FirstName, MiddleName, LastName) 
+AS "Full Name"
+FROM Employees
