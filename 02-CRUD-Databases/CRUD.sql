@@ -24,3 +24,11 @@ INSERT INTO Projects ([Name], StartDate)
 SELECT [Name] + ' Restructuring', GETDATE() FROM Departments
 
 SELECT * FROM Projects
+
+------------------------
+
+SELECT 
+	FirstName,
+	LastName,
+	d.[Name] AS DepartmentName
+FROM Employees AS e JOIN Departments AS d ON e.DepartmentID = d.DepartmentID
