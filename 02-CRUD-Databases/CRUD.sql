@@ -246,3 +246,9 @@ CASE
 END AS Currency
 FROM Countries
 ORDER BY CountryName ASC;
+
+-- 25
+
+SELECT [Name]
+FROM Characters
+ORDER BY [Name] ASC
