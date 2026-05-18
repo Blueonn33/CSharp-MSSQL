@@ -115,3 +115,9 @@ SELECT FirstName, LastName, Salary
 FROM Employees
 WHERE Salary > 50000
 ORDER BY Salary DESC
+
+-- 13
+
+SELECT TOP 5 FirstName, LastName
+FROM Employees
+ORDER BY Salary DESC
