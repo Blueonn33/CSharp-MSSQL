@@ -144,3 +144,18 @@ CREATE VIEW V_EmployeesSalaries AS
 	FROM Employees
 
 SELECT * FROM V_EmployeesSalaries
+
+-- 17
+
+CREATE VIEW V_EmployeeNameJobTitle AS
+	SELECT CONCAT_WS(' ', FirstName, MiddleName, LastName)
+		AS "Full Name",
+		JobTitle AS "Job Title"
+	FROM Employees
+
+SELECT * FROM V_EmployeeNameJobTitle
+
+SELECT FirstName + ' ' + MiddleName + ' ' + LastName
+		AS "Full Name",
+		JobTitle AS "Job Title"
+	FROM Employees
