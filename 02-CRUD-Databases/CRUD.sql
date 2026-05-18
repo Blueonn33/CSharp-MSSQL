@@ -42,3 +42,8 @@ CREATE SEQUENCE seq_NumberGenerator
 	INCREMENT BY 1
 
 SELECT NEXT VALUE FOR seq_NumberGenerator
+
+----------------------------
+
+DELETE FROM Towns
+WHERE TownID = 33
