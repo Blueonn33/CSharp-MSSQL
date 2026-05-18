@@ -191,3 +191,37 @@ ORDER BY StartDate, [Name]
 SELECT TOP 7 FirstName, LastName, HireDate 
 FROM Employees
 ORDER BY HireDate DESC
+
+-- 21
+
+UPDATE Employees
+SET Salary = Salary * 1.12
+WHERE DepartmentID IN (
+    SELECT DepartmentID
+    FROM Departments
+    WHERE [Name] IN ('Engineering', 'Tool Design', 'Marketing', 'Information Services')
+);
+
+SELECT Salary 
+FROM Employees AS e JOIN Departments AS d ON e.DepartmentId = d.DepartmentID
+WHERE d.DepartmentID IN (
+    SELECT DepartmentID
+    FROM Departments
+    WHERE [Name] IN ('Engineering', 'Tool Design', 'Marketing', 'Information Services')
+);
+
+UPDATE Employees
+SET Salary = Salary - (Salary * 0.12)
+WHERE DepartmentID IN (
+    SELECT DepartmentID
+    FROM Departments
+    WHERE [Name] IN ('Engineering', 'Tool Design', 'Marketing', 'Information Services')
+);
+
+SELECT * FROM Departments
+
+-- 22 
+
+SELECT PeakName
+FROM Peaks
+ORDER BY PeakName ASC
