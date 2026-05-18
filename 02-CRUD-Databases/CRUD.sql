@@ -31,4 +31,12 @@ SELECT
 	FirstName,
 	LastName,
 	d.[Name] AS DepartmentName
+INTO EmployeesWithDepartment
 FROM Employees AS e JOIN Departments AS d ON e.DepartmentID = d.DepartmentID
+
+---------------------------
+
+CREATE SEQUENCE seq_NumberGenerator
+	AS INT
+	START WITH 1
+	INCREMENT BY 1
