@@ -234,3 +234,15 @@ SELECT TOP 30
 FROM Countries	
 WHERE ContinentCode = 'EU'
 ORDER BY Population DESC, CountryName ASC
+
+-- 24
+
+SELECT * FROM Countries
+
+SELECT CountryName, CountryCode,
+CASE
+  WHEN CurrencyCode = 'EUR' THEN 'Euro'
+  ELSE 'Not Euro'
+END AS Currency
+FROM Countries
+ORDER BY CountryName ASC;
