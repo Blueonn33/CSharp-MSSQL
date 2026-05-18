@@ -47,3 +47,9 @@ SELECT NEXT VALUE FOR seq_NumberGenerator
 
 DELETE FROM Towns
 WHERE TownID = 33
+
+------------------------------
+
+UPDATE Projects
+SET EndDate = GETDATE()
+WHERE EndDate IS NULL
