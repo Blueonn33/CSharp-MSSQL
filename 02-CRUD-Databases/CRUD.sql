@@ -225,3 +225,12 @@ SELECT * FROM Departments
 SELECT PeakName
 FROM Peaks
 ORDER BY PeakName ASC
+
+-- 23
+
+SELECT TOP 30 
+	CountryName, 
+	[Population]	
+FROM Countries	
+WHERE ContinentCode = 'EU'
+ORDER BY Population DESC, CountryName ASC
