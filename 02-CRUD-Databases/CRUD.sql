@@ -61,3 +61,11 @@ SELECT * FROM PROJECTS
 -- 02
 
 SELECT * FROM Departments
+
+-- 03
+
+SELECT [Name] FROM Departments
+
+-- 04
+
+SELECT FirstName, LastName, Salary FROM Employees
