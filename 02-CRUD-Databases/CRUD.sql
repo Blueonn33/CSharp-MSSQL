@@ -53,3 +53,11 @@ WHERE TownID = 33
 UPDATE Projects
 SET EndDate = GETDATE()
 WHERE EndDate IS NULL
+
+SELECT * FROM PROJECTS
+
+
+
+-- 02
+
+SELECT * FROM Departments
