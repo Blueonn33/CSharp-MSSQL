@@ -89,3 +89,9 @@ FROM Employees
 
 SELECT * FROM Employees
 WHERE JobTitle = 'Sales Representative'
+
+-- 09
+
+SELECT FirstName, LastName, JobTitle
+FROM Employees
+WHERE Salary BETWEEN 20000 AND 30000
