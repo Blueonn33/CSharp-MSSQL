@@ -84,3 +84,8 @@ SELECT FirstName + '.' + LastName + '@softuni.bg'
 
 SELECT DISTINCT Salary
 FROM Employees
+
+-- 08
+
+SELECT * FROM Employees
+WHERE JobTitle = 'Sales Representative'
