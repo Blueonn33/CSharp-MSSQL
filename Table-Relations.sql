@@ -64,3 +64,10 @@ VALUES
 		('Model X', 2),
 		('Model 3', 2),
 		('Nova', 3)
+
+-- 03
+CREATE TABLE Students
+(
+	StudentID INT PRIMARY KEY IDENTITY(1, 1),
+	[Name] VARCHAR(50) NOT NULL,
+);
