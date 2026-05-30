@@ -125,6 +125,18 @@ INSERT INTO Teachers ([Name], ManagerID)
 			('Greta', 101);
 
 -- 05
+CREATE DATABASE OnlineStore
+USE OnlineStore
+
+CREATE TABLE Cities
+(
+	CityID INT PRIMARY KEY IDENTITY,
+	[Name] NVARCHAR(100) NOT NULL
+);
+
+
+
+-- 06
 CREATE DATABASE UniversityDB
 
 CREATE TABLE Subjects
