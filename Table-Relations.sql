@@ -85,3 +85,15 @@ CREATE TABLE StudentsExams
 	ExamID INT FOREIGN KEY REFERENCES Exams(ExamID)
 	PRIMARY KEY(StudentID, ExamID)
 );
+
+INSERT INTO Students ([Name])
+VALUES
+		('Mila'),
+		('Toni'),
+		('Ron')
+
+INSERT INTO Exams ([Name])
+VALUES
+		('SpringMVC'),
+		('Neo4j'),
+		('Oracle 11g')
