@@ -218,7 +218,7 @@ WHERE DepartmentID IN (
     WHERE [Name] IN ('Engineering', 'Tool Design', 'Marketing', 'Information Services')
 );
 
-SELECT * FROM Departments
+SELECT Salary FROM Departments;
 
 -- 22 
 
