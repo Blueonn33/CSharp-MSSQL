@@ -155,3 +155,9 @@ CREATE TABLE Payments
 	StudentID INT FOREIGN KEY REFERENCES Students(StudentID) NOT NULL
 );
 
+CREATE TABLE Agenda
+(
+	StudentID INT FOREIGN KEY REFERENCES Students(StudentID),
+	SubjectID INT FOREIGN KEY REFERENCES Subjects(SubjectID),
+	PRIMARY KEY(StudentID, SubjectID)
+);
