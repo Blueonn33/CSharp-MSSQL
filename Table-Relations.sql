@@ -34,3 +34,11 @@ INSERT INTO Persons (FirstName, Salary, PassportID)
 			('Roberto', 43300.00, 102),
 			('Tom', 56100.00, 103),
 			('Yana', 60200.00, 101)
+			
+-- 02
+CREATE TABLE Manufacturers
+(
+	ManufacturerID INT PRIMARY KEY IDENTITY(1, 1),
+	[Name] VARCHAR(50) NOT NULL,
+	EstablishedOn DATE
+);
