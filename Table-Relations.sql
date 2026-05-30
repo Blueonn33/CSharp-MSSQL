@@ -97,3 +97,12 @@ VALUES
 		('SpringMVC'),
 		('Neo4j'),
 		('Oracle 11g')
+
+INSERT INTO StudentsExams (StudentID, ExamID)
+VALUES	
+		(1, 101),
+		(1, 102),
+		(2, 101),
+		(2, 102),
+		(2, 103),
+		(3, 103)
