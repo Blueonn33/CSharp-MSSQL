@@ -124,4 +124,17 @@ INSERT INTO Teachers ([Name], ManagerID)
 			('Mark', 101),
 			('Greta', 101);
 
+-- 05
+CREATE DATABASE UniversityDB
 
+CREATE TABLE Subjects
+(
+	SubjectID INT PRIMARY KEY IDENTITY,
+	SubjectName NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Majors
+(
+	MajorID INT PRIMARY KEY IDENTITY,
+	[Name] NVARCHAR(100) NOT NULL
+);
