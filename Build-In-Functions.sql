@@ -35,5 +35,13 @@ SELECT
 		DATEPART(Q, InvoiceDate) AS Quater,
 		DATEPART(M, InvoiceDate) AS [Month],
 		YEAR(InvoiceDate) AS [Year],
-		DAY(InvoiceDate) AS Day
-		FROM Invoices
+		DAY(InvoiceDate) AS [Day]
+	FROM Invoices
+
+------------------
+
+SELECT 
+		EmployeeID,
+		FirstName,
+		DATEDIFF(DAY, HireDate, GETDATE()) AS YearsInService
+	FROM Employees
