@@ -25,3 +25,12 @@ INSERT INTO Passports (PassportNumber)
 			('N34FG21B'),
 			('K65LO4R7'),
 			('ZE657QP2')
+
+select * from Passports
+order by PassportID
+
+INSERT INTO Persons (FirstName, Salary, PassportID)
+	 VALUES
+			('Roberto', 43300.00, 102),
+			('Tom', 56100.00, 103),
+			('Yana', 60200.00, 101)
