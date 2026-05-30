@@ -45,3 +45,7 @@ SELECT
 		FirstName,
 		DATEDIFF(DAY, HireDate, GETDATE()) AS YearsInService
 	FROM Employees
+
+------------------
+
+SELECT DATENAME(WEEKDAY, '2004-10-21')
