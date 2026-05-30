@@ -77,3 +77,11 @@ CREATE TABLE Exams
 	ExamID INT PRIMARY KEY IDENTITY(101, 1),
 	[Name] VARCHAR(100) NOT NULL
 );
+
+-- Composite PK: Defines rules for NOT NULL + UNIQUE of 2 FKs
+CREATE TABLE StudentsExams
+(
+	StudentID INT FOREIGN KEY REFERENCES Students(StudentID),
+	ExamID INT FOREIGN KEY REFERENCES Exams(ExamID)
+	PRIMARY KEY(StudentID, ExamID)
+);
