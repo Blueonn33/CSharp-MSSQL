@@ -12,5 +12,12 @@ SELECT
 		Id,
 		CEILING(
 			CAST(CEILING(CAST(Quantity AS FLOAT) / BoxCapacity) AS FLOAT) / PalletCapacity
-		)
+		) AS Pallets
 		FROM Products
+
+-----------------
+
+SELECT SIGN(6)
+SELECT SIGN(-98)
+
+SELECT ROUND(RAND() * 100, 0)
