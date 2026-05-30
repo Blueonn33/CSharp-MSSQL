@@ -47,5 +47,7 @@ CREATE TABLE Models
 (
 	ModelID INT PRIMARY KEY IDENTITY(101, 1),
 	[Name] VARCHAR(70) NOT NULL,
-	ManufacturerID INT FOREIGN KEY REFERENCES Manufacturers(ManufacturerID)
+	ManufacturerID INT FOREIGN KEY REFERENCES Manufacturers(ManufacturerID) NOT NULL
 );
+
+
