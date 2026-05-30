@@ -50,4 +50,8 @@ CREATE TABLE Models
 	ManufacturerID INT FOREIGN KEY REFERENCES Manufacturers(ManufacturerID) NOT NULL
 );
 
-
+INSERT INTO Manufacturers ([Name], EstablishedOn)
+VALUES 
+		('BMW', '1916-03-07'),
+		('Tesla', '2003-01-01'),
+		('Lada', '1966-05-01')
