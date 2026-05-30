@@ -168,8 +168,6 @@ CREATE TABLE OrderItems
 	PRIMARY KEY(OrderID, ItemID)
 );
 
-DROP TABLE OrderItems
-
 -- 06
 CREATE DATABASE UniversityDB
 
@@ -207,3 +205,17 @@ CREATE TABLE Agenda
 	SubjectID INT FOREIGN KEY REFERENCES Subjects(SubjectID),
 	PRIMARY KEY(StudentID, SubjectID)
 );
+
+-- 09
+
+SELECT * FROM Peaks
+SELECT * FROM Mountains
+
+SELECT 
+		m.MountainRange,
+		p.PeakName,
+		p.Elevation
+FROM Peaks AS p 
+JOIN Mountains AS m ON m.Id = p.MountainId
+WHERE m.MountainRange = 'Rila'
+ORDER BY p.Elevation DESC
