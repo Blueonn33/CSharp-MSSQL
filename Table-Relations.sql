@@ -19,3 +19,9 @@ CREATE TABLE Persons
 	Salary DECIMAL(8, 2) NOT NULL,
 	PassportID INT UNIQUE FOREIGN KEY REFERENCES Passports(PassportID)
 );
+
+INSERT INTO Passports (PassportNumber)
+	 VALUES 
+			('N34FG21B'),
+			('K65LO4R7'),
+			('ZE657QP2')
