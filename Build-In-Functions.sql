@@ -72,3 +72,14 @@ SELECT * FROM Employees
 ORDER BY EmployeeID
 	OFFSET 1 * 10 - 10 ROWS		-- взема първите 10 ID-та
 	FETCH NEXT 10 ROWS ONLY
+
+------------------
+
+SELECT
+	ROW_NUMBER() OVER (PARTITION BY DepartmentId ORDER BY Salary) AS RowNum,
+	FirstName,
+	LastName,
+	DepartmentID,
+	Salary
+FROM Employees
+
