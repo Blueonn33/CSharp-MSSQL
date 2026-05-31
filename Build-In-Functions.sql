@@ -99,3 +99,5 @@ SELECT *
 -- [^..]	any character not in the range
 -- ESCAPE	specify a prefix to treat special characters as normal
 
+SELECT * FROM Projects 
+WHERE [Name] LIKE '%?_vest' ESCAPE '?'
