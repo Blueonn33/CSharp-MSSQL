@@ -247,7 +247,12 @@ SELECT Username, SUBSTRING(Email, CHARINDEX('@', Email) + 1, LEN(Email) - CHARIN
 FROM Users
 ORDER BY [Email Provider], Username
 
--- SUBSTRING(Email, 1, CHARINDEX(Email, '@'))
+-- 16
+SELECT Username, IpAddress AS [IP Address] 
+FROM Users
+WHERE IpAddress LIKE '___.1_%._%.___'
+ORDER BY Username
+
 -- 17
 SELECT [Name],
 	   CASE
