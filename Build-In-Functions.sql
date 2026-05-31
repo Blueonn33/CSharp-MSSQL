@@ -101,3 +101,11 @@ SELECT *
 
 SELECT * FROM Projects 
 WHERE [Name] LIKE '%?_vest' ESCAPE '?'
+
+--------------------
+
+-- 01
+
+SELECT FirstName, LastName
+FROM Employees
+WHERE FirstName LIKE 'Sa%'
