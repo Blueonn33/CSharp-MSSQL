@@ -64,6 +64,11 @@ FROM Employees
 SELECT COALESCE('Pesho', 'N/A', 'Misho', 'Lipsva')
 
 SELECT * FROM Employees
-ORDER BY FirstName
-	OFFSET 3 * 10 - 10 ROWS
+ORDER BY EmployeeID
+	OFFSET 0 * 10 ROWS			-- взема първите 10 ID-та
+	FETCH NEXT 10 ROWS ONLY
+
+SELECT * FROM Employees
+ORDER BY EmployeeID
+	OFFSET 1 * 10 - 10 ROWS		-- взема първите 10 ID-та
 	FETCH NEXT 10 ROWS ONLY
