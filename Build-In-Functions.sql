@@ -272,3 +272,10 @@ SELECT [Name],
 ORDER BY g.[Name], 
 		 Duration,
 		 [Part of the Day]
+
+-- 18
+SELECT ProductName,
+       OrderDate,
+       FORMAT(DATEADD(DAY, 3, OrderDate), 'yyyy-MM-dd 00:00:00.000') AS [Pay Due],
+	   FORMAT(DATEADD(MONTH, 1, OrderDate), 'yyyy-MM-dd 00:00:00.000') AS [Deliver Due]
+FROM Orders;
