@@ -209,6 +209,13 @@ ORDER BY Salary DESC
    WHERE [Rank] = 2
 ORDER BY Salary DESC		
 
+-- 12
+SELECT CountryName AS [Country Name],
+	   IsoCode AS [ISO Code]
+FROM Countries
+WHERE CountryName LIKE '%a%%a%%a%'
+ORDER BY IsoCode
+
 -- 13
 SELECT p.PeakName,
 	   r.RiverName,
