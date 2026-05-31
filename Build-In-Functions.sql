@@ -79,8 +79,10 @@ SELECT
 	ROW_NUMBER() OVER (PARTITION BY DepartmentId ORDER BY Salary) AS RowNum,
 	RANK() OVER (PARTITION BY DepartmentId ORDER BY Salary) AS [Rank],
 	DENSE_RANK() OVER (PARTITION BY DepartmentId ORDER BY Salary) AS DenseRank,
+	NTILE(2) OVER (PARTITION BY DepartmentId ORDER BY Salary) AS [NTile], -- devides by N groups(2)
 	FirstName,
 	LastName,
 	DepartmentID,
 	Salary
 FROM Employees
+
