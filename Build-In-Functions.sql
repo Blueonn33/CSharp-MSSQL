@@ -149,3 +149,14 @@ SELECT [Name]
 FROM Towns
 WHERE LEN([Name]) IN (5, 6)
 ORDER BY [Name]
+
+-- 06
+SELECT TownID, [Name] 
+FROM Towns
+WHERE [Name] LIKE '[MKBE]%'
+ORDER BY [Name]
+
+SELECT [Name] 
+FROM Towns
+WHERE [Name] LIKE '[MKBE]%'
+ORDER BY [Name]
