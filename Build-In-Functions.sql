@@ -133,3 +133,9 @@ WHERE LastName LIKE '%ei%'
 SELECT FirstName, LastName
 FROM Employees
 WHERE CHARINDEX('engineer', JobTitle) = 0
+
+-- 05
+SELECT [Name] 
+FROM Towns
+WHERE [Name] LIKE '_____' OR [Name] LIKE '______'
+ORDER BY [Name]
