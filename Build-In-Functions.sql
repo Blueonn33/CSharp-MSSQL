@@ -121,7 +121,15 @@ WHERE [Name] LIKE '%?_vest' ESCAPE '?'
   WHERE SUBSTRING(FirstName, 1, 2) = 'Sa'
 
 -- 02
-
 SELECT FirstName, LastName
 FROM Employees
 WHERE LastName LIKE '%ei%'
+
+-- 04
+-- I. Wildcard -> NOT LIKE '%engineer%'
+-- II. NOT CONTAINS('engineer', JobTitle)
+-- III. CHARINDEX('engineer', JobTitle) = 0
+
+SELECT FirstName, LastName
+FROM Employees
+WHERE CHARINDEX('engineer', JobTitle) = 0
