@@ -65,21 +65,22 @@ SELECT COALESCE('Pesho', 'N/A', 'Misho', 'Lipsva')
 
 SELECT * FROM Employees
 ORDER BY EmployeeID
-	OFFSET 0 * 10 ROWS			-- взема първите 10 ID-та
+	OFFSET 0 * 10 ROWS			-- retrives the first 10 IDs
 	FETCH NEXT 10 ROWS ONLY
 
 SELECT * FROM Employees
 ORDER BY EmployeeID
-	OFFSET 1 * 10 - 10 ROWS		-- взема първите 10 ID-та
+	OFFSET 1 * 10 - 10 ROWS		-- retrives the first 10 IDs
 	FETCH NEXT 10 ROWS ONLY
 
 ------------------
 
 SELECT
 	ROW_NUMBER() OVER (PARTITION BY DepartmentId ORDER BY Salary) AS RowNum,
+	RANK() OVER (PARTITION BY DepartmentId ORDER BY Salary) AS [Rank],
+	DENSE_RANK() OVER (PARTITION BY DepartmentId ORDER BY Salary) AS DenseRank,
 	FirstName,
 	LastName,
 	DepartmentID,
 	Salary
 FROM Employees
-
