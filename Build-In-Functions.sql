@@ -236,6 +236,12 @@ SELECT p.PeakName,
  WHERE RIGHT(p.PeakName, 1) = LEFT(r.RiverName, 1)
 ORDER BY Mix
 
+-- 14
+SELECT TOP 50 [Name], FORMAT([Start], 'yyyy-MM-dd') AS [Start]
+FROM Games
+WHERE YEAR([Start]) IN (2011, 2012)
+ORDER BY [Start], [Name]
+
 -- 17
 SELECT [Name],
 	   CASE
