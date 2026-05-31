@@ -178,6 +178,11 @@ SELECT FirstName, LastName
 FROM Employees
 WHERE YEAR(HireDate) > 2000
 
+-- 09
+SELECT FirstName, LastName
+FROM Employees
+WHERE LEN(LastName) = 5
+
 -- 10
   SELECT EmployeeID,
 		 FirstName,
