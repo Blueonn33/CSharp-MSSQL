@@ -57,3 +57,13 @@ SELECT CONVERT(INT, '43') + 3
 
 SELECT * FROM Employees
 WHERE MiddleName IS NULL
+
+SELECT ISNULL(MiddleName, 'N/A')	
+FROM Employees
+
+SELECT COALESCE('Pesho', 'N/A', 'Misho', 'Lipsva')
+
+SELECT * FROM Employees
+ORDER BY FirstName
+	OFFSET 3 * 10 - 10 ROWS
+	FETCH NEXT 10 ROWS ONLY
