@@ -156,7 +156,7 @@ FROM Towns
 WHERE [Name] LIKE '[MKBE]%'
 ORDER BY [Name]
 
-SELECT [Name] 
+SELECT TownID, [Name] 
 FROM Towns
-WHERE [Name] LIKE '[MKBE]%'
+WHERE LEFT([Name], 1) IN ('M', 'K', 'B', 'E')
 ORDER BY [Name]
