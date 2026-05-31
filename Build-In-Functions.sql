@@ -119,3 +119,9 @@ WHERE [Name] LIKE '%?_vest' ESCAPE '?'
 		FirstName, LastName
    FROM Employees
   WHERE SUBSTRING(FirstName, 1, 2) = 'Sa'
+
+-- 02
+
+SELECT FirstName, LastName
+FROM Employees
+WHERE LastName LIKE '%ei%'
