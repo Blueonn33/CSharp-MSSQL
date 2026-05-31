@@ -86,3 +86,10 @@ SELECT
 	Salary
 FROM Employees
 
+------------------
+
+SELECT * 
+  FROM Employees
+ WHERE 
+	   FirstName LIKE 'Ro%'
+
