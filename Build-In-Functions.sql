@@ -93,3 +93,9 @@ SELECT *
  WHERE 
 	   FirstName LIKE 'Ro%'
 
+-- %		any string, including zero-length
+-- _		any single character
+-- [...]	any character within range
+-- [^..]	any character not in the range
+-- ESCAPE	specify a prefix to treat special characters as normal
+
