@@ -210,11 +210,19 @@ ORDER BY Salary DESC
 ORDER BY Salary DESC		
 
 -- 12
+-- Малоумен начин
 SELECT CountryName AS [Country Name],
 	   IsoCode AS [ISO Code]
 FROM Countries
 WHERE CountryName LIKE '%a%%a%%a%'
 ORDER BY IsoCode
+
+-- Правилен начин
+SELECT CountryName AS [Country Name],
+       IsoCode AS [ISO Code]
+FROM Countries
+WHERE LEN(CountryName) - LEN(REPLACE(CountryName, 'a', '')) >= 3
+ORDER BY IsoCode;
 
 -- 13
 SELECT p.PeakName,
