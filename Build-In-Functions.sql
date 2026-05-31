@@ -49,3 +49,8 @@ SELECT
 ------------------
 
 SELECT DATENAME(WEEKDAY, '2004-10-21')
+
+------------------
+
+SELECT CAST('67' AS INT) + '3'
+SELECT CONVERT(INT, '43') + 3
