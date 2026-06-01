@@ -1,3 +1,4 @@
+-- Subqueries
 SELECT 
 	MIN(dt.AvgSalary) AS MinAverageSalary
 FROM
@@ -11,3 +12,16 @@ SELECT TOP 1
 	FROM Employees
 	GROUP BY DepartmentID
 	ORDER BY MinAverageSalary
+
+-- Common Table Expressions
+WITH AvgSalaryCTE (AverageSalary)
+AS 
+(SELECT AVG(Salary)
+	FROM Employees
+	GROUP BY DepartmentID)
+
+SELECT 
+	MIN(AverageSalary) AS MinAverageSalary
+FROM
+	AvgSalaryCTE
+
