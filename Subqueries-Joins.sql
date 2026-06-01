@@ -42,3 +42,21 @@ SELECT
 	a.AddressText
 FROM Employees AS e
 	JOIN Addresses AS a ON e.AddressID = a.AddressID
+
+SELECT * FROM #Employees
+
+CREATE TABLE ##Employees
+(
+	Id INT PRIMARY KEY,
+	FirstName VARCHAR(50) NOT NULL,
+	LastName VARCHAR(50) NOT NULL,
+)
+
+INSERT INTO ##Employees
+SELECT
+		EmployeeID,
+		FirstName,
+		LastName
+FROM Employees
+
+SELECT * FROM ##Employees
