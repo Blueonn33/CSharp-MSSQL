@@ -25,3 +25,20 @@ SELECT
 FROM
 	AvgSalaryCTE
 
+-- Temporary Tables
+CREATE TABLE #Employees
+(
+	Id INT PRIMARY KEY,
+	FirstName VARCHAR(50) NOT NULL,
+	LastName VARCHAR(50) NOT NULL,
+	[Address] VARCHAR(200) 
+);
+
+INSERT INTO #Employees 
+SELECT 
+	e.EmployeeID, 
+	e.FirstName, 
+	e.LastName,
+	a.AddressText
+FROM Employees AS e
+	JOIN Addresses AS a ON e.AddressID = a.AddressID
