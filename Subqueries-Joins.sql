@@ -45,6 +45,7 @@ FROM Employees AS e
 
 SELECT * FROM #Employees
 
+-- Global Temporary Table
 CREATE TABLE ##Employees
 (
 	Id INT PRIMARY KEY,
@@ -60,3 +61,4 @@ SELECT
 FROM Employees
 
 SELECT * FROM ##Employees
+
