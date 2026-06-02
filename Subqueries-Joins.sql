@@ -81,3 +81,13 @@ INNER JOIN Employees AS e ON e.EmployeeID = ep.EmployeeID
 INNER JOIN Projects AS p ON ep.ProjectID = p.ProjectID
 WHERE p.StartDate > '08/13/2002' AND p.EndDate IS NULL
 ORDER BY e.EmployeeID
+
+-- 09
+SELECT e.EmployeeID,
+	   e.FirstName,
+	   e.ManagerID,
+	   m.FirstName AS ManagerName
+FROM Employees as e
+JOIN Employees as m ON e.ManagerID = m.EmployeeID
+WHERE m.EmployeeID IN (3, 7)
+ORDER BY e.EmployeeID
