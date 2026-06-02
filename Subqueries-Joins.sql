@@ -70,3 +70,14 @@ FROM Employees AS e
 INNER JOIN Departments AS d ON e.DepartmentID = d.DepartmentID
 WHERE e.Salary > 15000
 ORDER BY d.DepartmentID
+
+-- 07
+SELECT TOP 5 
+	   e.EmployeeID,
+	   e.FirstName,
+	   p.[Name] AS ProjectName
+FROM EmployeesProjects AS ep
+INNER JOIN Employees AS e ON e.EmployeeID = ep.EmployeeID
+INNER JOIN Projects AS p ON ep.ProjectID = p.ProjectID
+WHERE p.StartDate > '08/13/2002' AND p.EndDate IS NULL
+ORDER BY e.EmployeeID
