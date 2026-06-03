@@ -180,11 +180,6 @@ GROUP BY d.DepartmentID
 ORDER BY MinAverageSalary
 
 -- 12
-SELECT * FROM Countries
-SELECT * FROM Mountains
-SELECT * FROM Peaks
-SELECT * FROM MountainsCountries
-
 SELECT 
 		c.CountryCode,
 		m.MountainRange,
@@ -205,6 +200,20 @@ LEFT JOIN MountainsCountries AS mc ON mc.CountryCode = c.CountryCode
 LEFT JOIN Mountains AS m ON mc.MountainId = m.Id
 WHERE CountryName IN ('United States', 'Russia', 'Bulgaria')
 GROUP BY c.CountryCode;
+
+-- 14
+SELECT * FROM Countries
+SELECT * FROM Rivers
+SELECT * FROM CountriesRivers
+
+SELECT TOP 5
+		c.CountryName,
+		r.RiverName
+FROM Countries AS c
+LEFT JOIN CountriesRivers AS cr ON c.CountryCode = cr.CountryCode
+LEFT JOIN Rivers AS r ON r.Id = cr.RiverId
+WHERE ContinentCode = 'AF'
+ORDER BY CountryName
 
 -- 15
 WITH CurrencyUsageResult AS 
