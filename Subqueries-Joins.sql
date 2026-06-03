@@ -158,10 +158,6 @@ WHERE m.EmployeeID IN (3, 7)
 ORDER BY e.EmployeeID
 
 -- 10
-SELECT * FROM Employees
-SELECT * FROM Projects
-SELECT * FROM EmployeesProjects
-
 SELECT TOP 50
 		e.EmployeeID,
 		CONCAT_WS(' ', e.FirstName, e.LastName) AS EmployeeName,
@@ -171,6 +167,17 @@ FROM Employees AS e
 JOIN Employees AS m ON e.ManagerID = m.EmployeeID
 JOIN Departments AS d ON e.DepartmentID = d.DepartmentID
 ORDER BY e.EmployeeID
+
+-- 11
+SELECT * FROM Employees
+SELECT * FROM Departments
+
+SELECT TOP 1
+		AVG(e.Salary) AS MinAverageSalary
+FROM Employees AS e
+JOIN Departments AS d ON e.DepartmentID = d.DepartmentID
+GROUP BY d.DepartmentID
+ORDER BY MinAverageSalary
 
 -- 13
 SELECT c.CountryCode,
