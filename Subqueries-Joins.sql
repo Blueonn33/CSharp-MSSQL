@@ -124,3 +124,25 @@ FROM
 ) AS CurrencyRankingQuery
 WHERE CurrencyRank = 1
 ORDER BY ContinentCode
+
+-- 18
+SELECT TOP 5 CountryName,												
+	   ISNULL(PeakName, '(no highest peak)') AS [Highest Peak Name],
+	   ISNULL(Elevation, 0) AS [Highest Peak Elevation],
+	   ISNULL(MountainRange, '(no mountain)') AS Mountain
+FROM (
+	SELECT c.CountryCode,
+		   c.CountryName,
+		   p.PeakName,
+		   p.Elevation,
+		   m.MountainRange,
+		   DENSE_RANK() OVER(PARTITION BY c.CountryCode ORDER BY p.Elevation DESC)
+		   AS PeakRank
+	FROM Countries AS c
+	LEFT JOIN MountainsCountries AS mc ON c.CountryCode = mc.CountryCode
+	LEFT JOIN Mountains AS m ON m.Id = mc.MountainId
+	LEFT JOIN Peaks AS p ON p.MountainId = m.Id
+) AS CountryPeaksRankQuery
+WHERE PeakRank = 1
+ORDER BY CountryName, 
+		 [Highest Peak Name]
