@@ -64,6 +64,18 @@ SELECT * FROM ##Employees
 
 ------------------
 
+-- 01
+SELECT * FROM Employees
+
+SELECT TOP 5 
+	   e.EmployeeID,
+	   e.JobTitle,
+	   e.AddressID,
+	   a.AddressText
+FROM Employees AS e
+JOIN Addresses AS a ON e.AddressID = a.AddressID
+ORDER BY e.AddressID
+
 -- 04
 SELECT TOP 5 EmployeeID, FirstName, Salary, d.[Name] AS DepartmentName
 FROM Employees AS e
