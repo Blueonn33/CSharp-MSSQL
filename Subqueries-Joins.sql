@@ -135,10 +135,6 @@ WHERE p.StartDate > '08/13/2002' AND p.EndDate IS NULL
 ORDER BY e.EmployeeID
 
 -- 08
-SELECT * FROM Employees
-SELECT * FROM Projects
-SELECT * FROM EmployeesProjects
-
 SELECT 
 		e.EmployeeID,
 		e.FirstName,
@@ -159,6 +155,21 @@ SELECT e.EmployeeID,
 FROM Employees as e
 JOIN Employees as m ON e.ManagerID = m.EmployeeID
 WHERE m.EmployeeID IN (3, 7)
+ORDER BY e.EmployeeID
+
+-- 10
+SELECT * FROM Employees
+SELECT * FROM Projects
+SELECT * FROM EmployeesProjects
+
+SELECT TOP 50
+		e.EmployeeID,
+		CONCAT_WS(' ', e.FirstName, e.LastName) AS EmployeeName,
+		CONCAT_WS(' ', m.FirstName, m.LastName) AS ManagerName,
+		d.[Name] AS DepartmentName
+FROM Employees AS e
+JOIN Employees AS m ON e.ManagerID = m.EmployeeID
+JOIN Departments AS d ON e.DepartmentID = d.DepartmentID
 ORDER BY e.EmployeeID
 
 -- 13
