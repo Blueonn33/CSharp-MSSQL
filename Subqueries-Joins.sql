@@ -202,10 +202,6 @@ WHERE CountryName IN ('United States', 'Russia', 'Bulgaria')
 GROUP BY c.CountryCode;
 
 -- 14
-SELECT * FROM Countries
-SELECT * FROM Rivers
-SELECT * FROM CountriesRivers
-
 SELECT TOP 5
 		c.CountryName,
 		r.RiverName
@@ -238,6 +234,17 @@ FROM
 ) AS CurrencyRankingQuery
 WHERE CurrencyRank = 1
 ORDER BY ContinentCode
+
+-- 16
+SELECT * FROM Countries
+SELECT * FROM Mountains
+SELECT * FROM MountainsCountries
+
+SELECT COUNT(*) AS Count
+FROM Countries AS c
+LEFT JOIN MountainsCountries AS mc 
+       ON mc.CountryCode = c.CountryCode
+WHERE mc.MountainId IS NULL;
 
 -- 18
 SELECT TOP 5 CountryName,												
