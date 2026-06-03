@@ -236,15 +236,55 @@ WHERE CurrencyRank = 1
 ORDER BY ContinentCode
 
 -- 16
-SELECT * FROM Countries
-SELECT * FROM Mountains
-SELECT * FROM MountainsCountries
-
 SELECT COUNT(*) AS Count
 FROM Countries AS c
 LEFT JOIN MountainsCountries AS mc 
        ON mc.CountryCode = c.CountryCode
 WHERE mc.MountainId IS NULL;
+
+-- 17
+SELECT * FROM Countries
+SELECT * FROM Peaks
+SELECT * FROM Rivers
+
+WITH HighestPeaks AS (
+    SELECT 
+        c.CountryCode,
+        MAX(p.Elevation) AS HighestPeakElevation
+    FROM Countries AS c
+    LEFT JOIN MountainsCountries AS mc 
+           ON mc.CountryCode = c.CountryCode
+    LEFT JOIN Mountains AS m 
+           ON m.Id = mc.MountainId
+    LEFT JOIN Peaks AS p 
+           ON p.MountainId = m.Id
+    GROUP BY c.CountryCode
+),
+LongestRivers AS (
+    SELECT 
+        c.CountryCode,
+        MAX(r.Length) AS LongestRiverLength
+    FROM Countries AS c
+    LEFT JOIN CountriesRivers AS cr 
+           ON cr.CountryCode = c.CountryCode
+    LEFT JOIN Rivers AS r 
+           ON r.Id = cr.RiverId
+    GROUP BY c.CountryCode
+)
+SELECT TOP 5
+       c.CountryName,
+       hp.HighestPeakElevation,
+       lr.LongestRiverLength
+FROM Countries AS c
+LEFT JOIN HighestPeaks AS hp 
+       ON hp.CountryCode = c.CountryCode
+LEFT JOIN LongestRivers AS lr 
+       ON lr.CountryCode = c.CountryCode
+ORDER BY 
+       hp.HighestPeakElevation DESC,
+       lr.LongestRiverLength DESC,
+       c.CountryName ASC;
+
 
 -- 18
 SELECT TOP 5 CountryName,												
