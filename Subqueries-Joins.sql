@@ -99,4 +99,28 @@ FROM Countries AS c
 LEFT JOIN MountainsCountries AS mc ON mc.CountryCode = c.CountryCode
 LEFT JOIN Mountains AS m ON mc.MountainId = m.Id
 WHERE CountryName IN ('United States', 'Russia', 'Bulgaria')
-GROUP BY c.CountryCode
+GROUP BY c.CountryCode;
+
+-- 15
+WITH CurrencyUsageResult AS 
+(
+    SELECT ContinentCode, 
+           CurrencyCode,
+           COUNT(CountryCode) AS CurrencyUsage
+    FROM Countries
+    GROUP BY ContinentCode, CurrencyCode         
+    HAVING COUNT(CountryCode) > 1
+)
+
+SELECT ContinentCode,	
+	   CurrencyCode,
+	   CurrencyUsage
+FROM
+(
+	SELECT *,
+		   DENSE_RANK() OVER(PARTITION BY ContinentCode ORDER BY CurrencyUsage DESC)
+		   AS CurrencyRank
+	FROM CurrencyUsageResult
+) AS CurrencyRankingQuery
+WHERE CurrencyRank = 1
+ORDER BY ContinentCode
