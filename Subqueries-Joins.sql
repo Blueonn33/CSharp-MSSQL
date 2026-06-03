@@ -66,6 +66,8 @@ SELECT * FROM ##Employees
 
 -- 01
 SELECT * FROM Employees
+SELECT * FROM Towns
+SELECT * FROM Addresses
 
 SELECT TOP 5 
 	   e.EmployeeID,
@@ -75,6 +77,17 @@ SELECT TOP 5
 FROM Employees AS e
 JOIN Addresses AS a ON e.AddressID = a.AddressID
 ORDER BY e.AddressID
+
+-- 02
+SELECT TOP 50
+	   e.FirstName,
+	   e.LastName,
+	   t.[Name] AS Town,
+	   a.AddressText
+FROM Employees AS e
+JOIN Addresses AS a ON e.AddressID = a.AddressID
+JOIN Towns AS t ON t.TownID = a.TownID
+ORDER BY e.FirstName, e.LastName
 
 -- 04
 SELECT TOP 5 EmployeeID, FirstName, Salary, d.[Name] AS DepartmentName
