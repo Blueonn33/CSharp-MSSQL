@@ -9,7 +9,19 @@ ORDER BY DepartmentID, Salary DESC
 
 SELECT 
 		DepartmentID,
-		SUM(Salary) AS TotalSalary
+		COUNT(DepartmentID) AS EmployeesCount,
+		MIN(Salary) AS MinSalary,
+		MAX(Salary) AS MaxSalary,
+		AVG(Salary) AS AverageSalary,
+		SUM(Salary) AS TotalSalary,
+		STRING_AGG(CONCAT_WS(' ', FirstName, LastName), ', ') 
+			WITHIN GROUP (ORDER BY Salary DESC)
 FROM Employees
 GROUP BY DepartmentID
 ORDER BY 1 -- DepartmentID
+
+SELECT SUM(Salary)
+FROM Employees
+
+-------
+
