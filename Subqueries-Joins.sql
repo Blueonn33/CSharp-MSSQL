@@ -91,3 +91,12 @@ FROM Employees as e
 JOIN Employees as m ON e.ManagerID = m.EmployeeID
 WHERE m.EmployeeID IN (3, 7)
 ORDER BY e.EmployeeID
+
+-- 13
+SELECT c.CountryCode,
+	   COUNT(MountainID) AS MountainRanges
+FROM Countries AS c
+LEFT JOIN MountainsCountries AS mc ON mc.CountryCode = c.CountryCode
+LEFT JOIN Mountains AS m ON mc.MountainId = m.Id
+WHERE CountryName IN ('United States', 'Russia', 'Bulgaria')
+GROUP BY c.CountryCode
