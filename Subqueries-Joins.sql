@@ -86,10 +86,6 @@ JOIN Towns AS t ON t.TownID = a.TownID
 ORDER BY e.FirstName, e.LastName
 
 -- 03
-SELECT * FROM Employees
-SELECT * FROM Projects
-SELECT * FROM EmployeesProjects
-
 SELECT e.EmployeeID,
 	   e.FirstName,
 	   e.LastName,
@@ -117,6 +113,19 @@ WHERE p.[Name] IS NULL
 ORDER BY e.EmployeeID
 
 -- 06
+SELECT * FROM Employees
+SELECT * FROM Departments
+SELECT * FROM EmployeesProjects
+
+SELECT e.FirstName,
+	   e.LastName,
+	   e.HireDate,
+	   d.[Name]
+FROM Employees AS e
+JOIN Departments AS d ON d.DepartmentID = e.DepartmentID 
+AND d.[Name] IN ('Sales', 'Finance')
+WHERE e.HireDate > '01/01/1999'
+ORDER BY e.HireDate
 
 -- 07
 SELECT TOP 5 
