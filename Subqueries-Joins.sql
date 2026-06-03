@@ -113,10 +113,6 @@ WHERE p.[Name] IS NULL
 ORDER BY e.EmployeeID
 
 -- 06
-SELECT * FROM Employees
-SELECT * FROM Departments
-SELECT * FROM EmployeesProjects
-
 SELECT e.FirstName,
 	   e.LastName,
 	   e.HireDate,
@@ -137,6 +133,23 @@ INNER JOIN Employees AS e ON e.EmployeeID = ep.EmployeeID
 INNER JOIN Projects AS p ON ep.ProjectID = p.ProjectID
 WHERE p.StartDate > '08/13/2002' AND p.EndDate IS NULL
 ORDER BY e.EmployeeID
+
+-- 08
+SELECT * FROM Employees
+SELECT * FROM Projects
+SELECT * FROM EmployeesProjects
+
+SELECT 
+		e.EmployeeID,
+		e.FirstName,
+		CASE
+			WHEN YEAR(p.StartDate) >= 2005 THEN NULL
+			ELSE p.[Name] 
+		END AS ProjectName
+FROM Employees AS e
+JOIN EmployeesProjects AS ep ON ep.EmployeeID = e.EmployeeID
+JOIN Projects AS p ON p.ProjectID = ep.ProjectID
+WHERE e.EmployeeID = 24
 
 -- 09
 SELECT e.EmployeeID,
