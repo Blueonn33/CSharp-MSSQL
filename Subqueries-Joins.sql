@@ -87,8 +87,8 @@ ORDER BY e.FirstName, e.LastName
 
 -- 03
 SELECT * FROM Employees
-SELECT * FROM Departments
-SELECT * FROM Addresses
+SELECT * FROM Projects
+SELECT * FROM EmployeesProjects
 
 SELECT e.EmployeeID,
 	   e.FirstName,
@@ -105,6 +105,18 @@ FROM Employees AS e
 INNER JOIN Departments AS d ON e.DepartmentID = d.DepartmentID
 WHERE e.Salary > 15000
 ORDER BY d.DepartmentID
+
+-- 05
+SELECT TOP 3
+	   e.EmployeeID,
+	   e.FirstName
+FROM Employees AS e
+LEFT JOIN EmployeesProjects AS ep ON ep.EmployeeID = e.EmployeeID
+LEFT JOIN Projects AS p ON p.ProjectID = ep.ProjectID
+WHERE p.[Name] IS NULL
+ORDER BY e.EmployeeID
+
+-- 06
 
 -- 07
 SELECT TOP 5 
