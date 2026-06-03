@@ -25,3 +25,9 @@ FROM Employees
 
 -------
 
+SELECT 
+		DepartmentID,
+		SUM(Salary) AS TotalSalary
+FROM Employees
+GROUP BY DepartmentID
+HAVING SUM(Salary) > 300000
