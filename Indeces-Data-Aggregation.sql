@@ -31,3 +31,15 @@ SELECT
 FROM Employees
 GROUP BY DepartmentID
 HAVING SUM(Salary) > 300000
+
+--
+
+SELECT *
+FROM (
+	SELECT 
+			DepartmentID,
+			SUM(Salary) AS TotalSalary
+	FROM Employees
+	GROUP BY DepartmentID
+) AS d
+WHERE d.TotalSalary < 100000
