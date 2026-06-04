@@ -221,3 +221,21 @@ GROUP BY DepartmentID
 HAVING MAX(Salary) NOT BETWEEN 30000 AND 70000
 
 -- 18
+-- Nth Highest/Lowest value -> Window functions (Ranking) instead of 
+-- Grouping (Aggregation)
+
+SELECT *
+FROM Employees
+ORDER BY DepartmentID
+
+SELECT DISTINCT 
+				DepartmentID,
+				Salary AS ThirdHighestSalary
+FROM (
+		SELECT  DepartmentID,
+				Salary,
+				DENSE_RANK() OVER(PARTITION BY DepartmentID ORDER BY Salary DESC)
+				AS SalaryRank
+		FROM Employees
+) AS SalaryRankQuery
+WHERE SalaryRank = 3
