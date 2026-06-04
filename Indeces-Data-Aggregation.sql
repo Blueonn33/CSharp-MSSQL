@@ -153,6 +153,14 @@ FROM (
 GROUP BY AgeGroup
 
 -- 10
+SELECT DISTINCT SUBSTRING(FirstName, 1, 1)
+FROM (
+	SELECT FirstName,
+		   DepositGroup
+	FROM WizzardDeposits
+	GROUP BY FirstName, DepositGroup
+) AS FirstNameDepositQuery
+WHERE DepositGroup = 'Troll Chest'
 
 -- 12
 -- I - Subquery
