@@ -162,6 +162,24 @@ FROM (
 ) AS FirstNameDepositQuery
 WHERE DepositGroup = 'Troll Chest'
 
+-- 11
+SELECT * FROM WizzardDeposits
+
+SELECT 
+		DepositGroup,
+		IsDepositExpired,
+		AverageInterest
+FROM (
+		SELECT  DepositGroup,
+				IsDepositExpired,
+				AVG(DepositInterest) AS AverageInterest		
+		FROM WizzardDeposits
+		WHERE DepositStartDate > '01/01/1985'
+		GROUP BY DepositGroup, IsDepositExpired
+) AS d
+GROUP BY DepositGroup, IsDepositExpired, AverageInterest
+ORDER BY DepositGroup DESC, IsDepositExpired ASC
+
 -- 12
 -- I - Subquery
 SELECT SUM([Difference]) AS SumDifference
