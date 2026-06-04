@@ -239,3 +239,28 @@ FROM (
 		FROM Employees
 ) AS SalaryRankQuery
 WHERE SalaryRank = 3
+
+-- 19
+-- I. Write a query that finds average salary per department
+-- II. Filter out Employees whose Salary > Avg
+-- III. Order by + Fetch
+
+-- I.
+SELECT DepartmentID,
+	   AVG(Salary) AS AverageSalary
+FROM Employees
+WHERE DepartmentID = 1
+
+-- II. Use above query as subquery to filter out employees with higher AVG salary
+SELECT TOP 10
+		FirstName,
+		LastName,
+		DepartmentID
+FROM Employees AS e
+WHERE e.Salary > (
+						SELECT 
+							   AVG(Salary) AS AverageSalary
+						FROM Employees
+						WHERE DepartmentID = e.DepartmentID
+				 )
+ORDER BY e.DepartmentID
