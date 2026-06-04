@@ -155,7 +155,7 @@ GROUP BY AgeGroup
 -- 10
 
 -- 12
--- I
+-- I - Subquery
 SELECT SUM([Difference]) AS SumDifference
 FROM (
 		SELECT
@@ -168,7 +168,15 @@ FROM (
 		JOIN WizzardDeposits AS g ON h.Id + 1 = g.Id
 ) AS DifferenceQuery
 
--- II
+-- II - No subquery
 SELECT SUM(h.DepositAmount - g.DepositAmount) AS SumDifference
 		FROM WizzardDeposits AS h
 		JOIN WizzardDeposits AS g ON h.Id + 1 = g.Id
+
+-- III - Window function
+SELECT 
+		FirstName AS [Host Wizard],
+		DepositAmount AS [Host Wizard Deposit],
+		LEAD(FirstName) OVER (ORDER BY Id) AS [Guest Wizard],
+		LEAD(DepositAmount) OVER(ORDER BY Id) AS [Guest Wizard Deposit]
+FROM WizzardDeposits
