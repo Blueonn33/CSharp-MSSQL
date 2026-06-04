@@ -49,3 +49,12 @@ SELECT
 FROM Employees
 GROUP BY DepartmentID
 HAVING SUM(Salary) < 100000
+
+---------------------------------------------------------------------------
+
+-- 03
+SELECT 
+		DepositGroup,
+		COUNT(*) AS WizardsPerDepositGroup
+FROM WizzardDeposits
+GROUP BY DepositGroup
