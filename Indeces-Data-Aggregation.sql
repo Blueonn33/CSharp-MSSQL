@@ -174,9 +174,13 @@ SELECT SUM(h.DepositAmount - g.DepositAmount) AS SumDifference
 		JOIN WizzardDeposits AS g ON h.Id + 1 = g.Id
 
 -- III - Window function
-SELECT 
-		FirstName AS [Host Wizard],
-		DepositAmount AS [Host Wizard Deposit],
-		LEAD(FirstName) OVER (ORDER BY Id) AS [Guest Wizard],
-		LEAD(DepositAmount) OVER(ORDER BY Id) AS [Guest Wizard Deposit]
-FROM WizzardDeposits
+SELECT SUM([Host Wizard Deposit] - [Guest Wizard Deposit]) AS SumDifference
+FROM (
+		SELECT 
+				FirstName AS [Host Wizard],
+				DepositAmount AS [Host Wizard Deposit],
+				LEAD(FirstName) OVER (ORDER BY Id) AS [Guest Wizard],
+				LEAD(DepositAmount) OVER(ORDER BY Id) AS [Guest Wizard Deposit],
+				(DepositAmount - LEAD(DepositAmount) OVER(ORDER BY Id)) AS [Difference]
+		FROM WizzardDeposits
+) AS HostGuestWizzardDiffQuery
