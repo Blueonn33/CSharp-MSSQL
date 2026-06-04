@@ -52,6 +52,10 @@ HAVING SUM(Salary) < 100000
 
 ---------------------------------------------------------------------------
 
+-- 01
+SELECT COUNT(*) AS [Count]
+FROM WizzardDeposits
+
 -- 03
 -- GROUP BY is used for data aggregation
 -- Data aggregation is the process of summarizing of the data based on unique
@@ -95,3 +99,5 @@ FROM (
 		FROM WizzardDeposits
 ) AS AgeGroupingQuery
 GROUP BY AgeGroup
+
+-- 12
