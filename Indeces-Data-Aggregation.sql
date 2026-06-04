@@ -185,6 +185,27 @@ FROM (
 		FROM WizzardDeposits
 ) AS HostGuestWizzardDiffQuery
 
+-- 15
+-- SELECT [Columns] INTO -> Syntax for insert of returned data set into new table
+-- #TableName -> Defines temp table in tempdb only for the current connection
+-- DELETE FROM -> DO NOT forget the WHERE clause
+
+SELECT *
+INTO #EmployeesHighSalaryTempTable
+FROM Employees
+WHERE Salary > 30000
+
+SELECT *
+FROM #EmployeesHighSalaryTempTable
+WHERE ManagerID = 42
+
+DELETE
+FROM #EmployeesHighSalaryTempTable
+WHERE ManagerID = 42
+
+SELECT AVG(Salary) AS AverageSalary
+FROM #EmployeesHighSalaryTempTable
+
 -- 16
 -- I. Sort all Employees in Groups (Aggregation) based on Department in which
 -- they work
@@ -195,3 +216,5 @@ SELECT
 FROM Employees
 GROUP BY DepartmentID
 HAVING MAX(Salary) NOT BETWEEN 30000 AND 70000
+
+-- 18
