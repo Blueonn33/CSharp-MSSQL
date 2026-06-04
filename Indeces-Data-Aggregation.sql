@@ -195,13 +195,12 @@ INTO #EmployeesHighSalaryTempTable
 FROM Employees
 WHERE Salary > 30000
 
-SELECT *
-FROM #EmployeesHighSalaryTempTable
-WHERE ManagerID = 42
-
 DELETE
 FROM #EmployeesHighSalaryTempTable
 WHERE ManagerID = 42
+
+UPDATE #EmployeesHighSalaryTempTable
+SET Salary += 5000
 
 SELECT AVG(Salary) AS AverageSalary
 FROM #EmployeesHighSalaryTempTable
