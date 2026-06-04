@@ -55,6 +55,6 @@ HAVING SUM(Salary) < 100000
 -- 03
 SELECT 
 		DepositGroup,
-		COUNT(*) AS WizardsPerDepositGroup
+		MAX(MagicWandSize) AS LongestMagicWand
 FROM WizzardDeposits
 GROUP BY DepositGroup
