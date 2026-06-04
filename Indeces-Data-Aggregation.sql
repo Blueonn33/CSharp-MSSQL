@@ -56,6 +56,10 @@ HAVING SUM(Salary) < 100000
 SELECT COUNT(*) AS [Count]
 FROM WizzardDeposits
 
+-- 02
+SELECT MAX(MagicWandSize) AS LongestMagicWand
+FROM WizzardDeposits
+
 -- 03
 -- GROUP BY is used for data aggregation
 -- Data aggregation is the process of summarizing of the data based on unique
