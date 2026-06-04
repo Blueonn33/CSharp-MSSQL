@@ -77,13 +77,6 @@ GROUP BY DepositGroup
 
 -- 04
 SELECT TOP 2
-		DepositGroup,
-		AVG(MagicWandSize) AS MinWandSize
-FROM WizzardDeposits
-GROUP BY DepositGroup
-ORDER BY MinWandSize ASC
-
-SELECT TOP 2
 		DepositGroup
 FROM (
 		SELECT  
@@ -93,6 +86,15 @@ FROM (
 		GROUP BY DepositGroup
 ) AS DepositGroup
 ORDER BY MinWandSize ASC
+
+-- 05
+SELECT * FROM WizzardDeposits
+
+SELECT 
+		DepositGroup,
+		SUM(DepositAmount) AS TotalSum
+FROM WizzardDeposits
+GROUP BY DepositGroup
 
 -- 09
 SELECT *
