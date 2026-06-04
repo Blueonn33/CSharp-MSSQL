@@ -152,4 +152,23 @@ FROM (
 ) AS AgeGroupingQuery
 GROUP BY AgeGroup
 
+-- 10
+
 -- 12
+-- I
+SELECT SUM([Difference]) AS SumDifference
+FROM (
+		SELECT
+				h.FirstName AS [Host Wizard],
+				h.DepositAmount AS [Host Wizard Deposit],
+				g.FirstName AS [Guest Wizard],
+				g.DepositAmount AS [Guest Wizard Deposit],
+				h.DepositAmount - g.DepositAmount AS [Difference]
+		FROM WizzardDeposits AS h
+		JOIN WizzardDeposits AS g ON h.Id + 1 = g.Id
+) AS DifferenceQuery
+
+-- II
+SELECT SUM(h.DepositAmount - g.DepositAmount) AS SumDifference
+		FROM WizzardDeposits AS h
+		JOIN WizzardDeposits AS g ON h.Id + 1 = g.Id
