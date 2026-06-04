@@ -218,6 +218,14 @@ SELECT
 FROM Employees
 GROUP BY DepartmentID
 
+-- 14
+SELECT 
+		DepartmentID,
+		MIN(Salary) AS MinimumSalary
+FROM Employees
+WHERE DepartmentID IN (2, 5, 7) AND HireDate > '01/01/2000'
+GROUP BY DepartmentID
+
 -- 15
 -- SELECT [Columns] INTO -> Syntax for insert of returned data set into new table
 -- #TableName -> Defines temp table in tempdb only for the current connection
