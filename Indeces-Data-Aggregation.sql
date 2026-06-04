@@ -261,6 +261,13 @@ FROM Employees
 GROUP BY DepartmentID
 HAVING MAX(Salary) NOT BETWEEN 30000 AND 70000
 
+-- 17
+SELECT 
+		COUNT(*) AS [Count]
+FROM Employees AS e
+LEFT JOIN Employees AS m ON m.EmployeeID = e.ManagerID
+WHERE e.ManagerID IS NULL
+
 -- 18
 -- Nth Highest/Lowest value -> Window functions (Ranking) instead of 
 -- Grouping (Aggregation)
