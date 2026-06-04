@@ -53,8 +53,18 @@ HAVING SUM(Salary) < 100000
 ---------------------------------------------------------------------------
 
 -- 03
+-- GROUP BY is used for data aggregation
+-- Data aggregation is the process of summarizing of the data based on unique
+-- group values
+-- In SELECT clause, we can use ONLY columns from GROUP BY (Group Names) + Aggregating Functions
+-- GROUP BY -> Find distinct values for a column(s) and sort all data records
+-- from table in each group
+-- Aggregating functions iterate over all data records in a Group and returns statistics
+
 SELECT 
 		DepositGroup,
 		MAX(MagicWandSize) AS LongestMagicWand
 FROM WizzardDeposits
 GROUP BY DepositGroup
+
+-- 
