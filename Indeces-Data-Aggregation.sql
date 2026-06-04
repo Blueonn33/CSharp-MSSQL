@@ -184,3 +184,14 @@ FROM (
 				(DepositAmount - LEAD(DepositAmount) OVER(ORDER BY Id)) AS [Difference]
 		FROM WizzardDeposits
 ) AS HostGuestWizzardDiffQuery
+
+-- 16
+-- I. Sort all Employees in Groups (Aggregation) based on Department in which
+-- they work
+
+SELECT 
+		DepartmentID,
+		MAX(Salary) AS MaxSalary
+FROM Employees
+GROUP BY DepartmentID
+HAVING MAX(Salary) NOT BETWEEN 30000 AND 70000
