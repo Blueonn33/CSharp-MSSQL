@@ -188,7 +188,7 @@ FROM (
 -- 15
 -- SELECT [Columns] INTO -> Syntax for insert of returned data set into new table
 -- #TableName -> Defines temp table in tempdb only for the current connection
--- DELETE FROM -> DO NOT forget the WHERE clause
+-- DELETE FROM / UPDATE -> DO NOT forget the WHERE clause
 
 SELECT *
 INTO #EmployeesHighSalaryTempTable
@@ -201,9 +201,13 @@ WHERE ManagerID = 42
 
 UPDATE #EmployeesHighSalaryTempTable
 SET Salary += 5000
+WHERE DepartmentID = 1
 
-SELECT AVG(Salary) AS AverageSalary
+SELECT 
+		DepartmentID,
+		AVG(Salary) AS AverageSalary
 FROM #EmployeesHighSalaryTempTable
+GROUP BY DepartmentID
 
 -- 16
 -- I. Sort all Employees in Groups (Aggregation) based on Department in which
