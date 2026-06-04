@@ -77,9 +77,11 @@ SELECT
 		SUM(CASE WHEN Age BETWEEN 21 AND 30 THEN 1 ELSE 0 END) AS "[21-30]"
 FROM WizzardDeposits
 
-SELECT * 
+SELECT 
+		AgeGroup,
+	    COUNT(Id) AS WizardCount
 FROM (
-		SELECT 
+		SELECT *,
 				CASE 
 					WHEN Age BETWEEN 0 AND 10 THEN '[0-10]'
 					WHEN Age BETWEEN 11 AND 20 THEN '[11-20]'
@@ -92,3 +94,4 @@ FROM (
 			 AS AgeGroup
 		FROM WizzardDeposits
 ) AS AgeGroupingQuery
+GROUP BY AgeGroup
