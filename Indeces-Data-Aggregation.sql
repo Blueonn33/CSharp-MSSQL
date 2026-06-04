@@ -211,6 +211,13 @@ FROM (
 		FROM WizzardDeposits
 ) AS HostGuestWizzardDiffQuery
 
+-- 13
+SELECT 
+		DepartmentID,
+		SUM(Salary) AS TotalSalary
+FROM Employees
+GROUP BY DepartmentID
+
 -- 15
 -- SELECT [Columns] INTO -> Syntax for insert of returned data set into new table
 -- #TableName -> Defines temp table in tempdb only for the current connection
