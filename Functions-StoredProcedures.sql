@@ -77,6 +77,19 @@ AS
 	WHERE DATEDIFF(YEAR, HireDate, GETDATE()) > @MinYears
 	ORDER BY HireDate
 
-EXEC usp_SelectEmployeesBySeniority
+EXEC usp_SelectEmployeesBySeniority 24
+-- EXEC usp_SelectEmployeesBySeniority @MinYears = 24
 
 EXEC sp_depends usp_SelectEmployeesBySeniority
+
+-----------------
+-- sum 2 numbers - stored procedure
+
+CREATE OR ALTER PROCEDURE usp_AddNumbers
+(
+	@FirstNumber INT,
+	@SecondNumber INT,
+	@Result INT OUTPUT
+)
+AS 
+SET @Result = @FirstNumber + @SecondNumber
