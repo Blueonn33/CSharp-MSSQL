@@ -70,7 +70,8 @@ AS
 	SELECT 
 			FirstName,
 			LastName,
-			HireDate
+			HireDate,
+			DATEDIFF(YEAR, HireDate, GETDATE()) AS YearsOnDuty
 	FROM Employees
 	WHERE DATEDIFF(YEAR, HireDate, GETDATE()) > 20
 	ORDER BY HireDate
