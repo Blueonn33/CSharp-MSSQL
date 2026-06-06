@@ -188,3 +188,34 @@ EXEC usp_GetEmployeesSalaryAboveNumber 48100
 -- 06
 -- 07
 
+GO
+
+CREATE FUNCTION ufn_IsWordComprised (@setOfLetters VARCHAR(50) = '', @word VARCHAR(100) = '')
+RETURNS BIT AS
+		 BEGIN
+				-- Define variable to store the current word index (starting from 1)
+				-- String indeces in SQL start from 1
+				DECLARE @wordIndex AS TINYINT = 1;
+				DECLARE @currentLetter AS CHAR(1);
+				DECLARE @letterIndex AS TINYINT = 0;
+
+				-- SQL code in WHILE loop will be repeated length of word times
+				WHILE @wordIndex <= LEN(@word)
+				BEGIN
+						-- SQL code here will be repeated until value of wordIndex is <= of the length of the word
+						SET @currentLetter = LOWER(SUBSTRING(@word, @wordIndex, 1));
+						SET @letterIndex = CHARINDEX(@currentLetter, @setOfLetters)
+
+						IF @letterIndex = 0
+						BEGIN
+							-- Missing letter is found
+							RETURN 0;
+						END
+
+						-- Guarantee that the loop will end at some point
+						SET @wordIndex += 1;
+				END
+
+				-- All letters from the word were found in the set
+				RETURN 1;
+		   END
