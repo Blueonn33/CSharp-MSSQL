@@ -66,6 +66,7 @@ FROM Employees
 --------------
 
 CREATE OR ALTER PROCEDURE usp_SelectEmployeesBySeniority
+(@MinYears INT = 5)
 AS 
 	SELECT 
 			FirstName,
@@ -73,7 +74,7 @@ AS
 			HireDate,
 			DATEDIFF(YEAR, HireDate, GETDATE()) AS YearsOnDuty
 	FROM Employees
-	WHERE DATEDIFF(YEAR, HireDate, GETDATE()) > 20
+	WHERE DATEDIFF(YEAR, HireDate, GETDATE()) > @MinYears
 	ORDER BY HireDate
 
 EXEC usp_SelectEmployeesBySeniority
