@@ -85,6 +85,8 @@ EXEC sp_depends usp_SelectEmployeesBySeniority
 -----------------
 -- sum 2 numbers - stored procedure
 
+GO
+
 CREATE OR ALTER PROCEDURE usp_AddNumbers
 (
 	@FirstNumber INT,
@@ -93,3 +95,10 @@ CREATE OR ALTER PROCEDURE usp_AddNumbers
 )
 AS 
 SET @Result = @FirstNumber + @SecondNumber
+
+GO
+
+DECLARE @answer INT
+EXEC usp_AddNumbers 5, 6, @answer OUTPUT
+
+SELECT CONCAT_WS(' ', 'The result is', @answer) AS SumOfNumbers
