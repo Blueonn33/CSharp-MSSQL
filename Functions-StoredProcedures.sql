@@ -59,5 +59,6 @@ END;
 SELECT
 		FirstName,
 		LastName,
+		Salary,
 		dbo.udf_SalaryLevel(Salary) AS SalaryLevel
 FROM Employees
