@@ -35,3 +35,23 @@ RETURN
 
 SELECT *
 FROM udf_AverageSalary('Sales')
+
+------------
+CREATE FUNCTION udf_SalaryLevel(@Salary MONEY)
+RETURNS VARCHAR(10)
+BEGIN
+	DECLARE @level VARCHAR(10)
+	IF(@Salary < 30000)
+	BEGIN
+		SET @level = 'Low'
+	END
+	ELSE IF(@Salary <= 50000)
+	BEGIN
+		SET @level = 'Average'
+	END
+	ELSE
+	BEGIN
+		SET @level = 'High'
+	END
+	RETURN @level
+END;
