@@ -123,3 +123,9 @@ END CATCH
 GO
 
 EXEC usp_FailProc
+
+DECLARE @test INT
+SELECT 1/0
+SET @test = @@ERROR
+
+SELECT @test
