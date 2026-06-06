@@ -134,6 +134,8 @@ SELECT @test
 ---------------------------------
 
 -- 01
+GO
+
 CREATE PROCEDURE usp_GetEmployeesSalaryAbove35000
 AS
 (
@@ -143,3 +145,24 @@ AS
 	FROM Employees
 	WHERE Salary > 35000
 )
+
+GO
+
+EXEC usp_GetEmployeesSalaryAbove35000
+
+GO 
+
+CREATE PROCEDURE usp_GetEmployeesSalaryAbove35000AndDepartment
+AS
+BEGIN
+	SELECT 
+			FirstName,
+			LastName
+	FROM Employees
+	WHERE Salary > 35000
+
+	SELECT *
+	FROM Departments
+END
+
+GO
