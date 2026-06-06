@@ -121,3 +121,5 @@ BEGIN CATCH
 		ERROR_MESSAGE() AS ErrorMessage;
 END CATCH
 GO
+
+EXEC usp_FailProc
