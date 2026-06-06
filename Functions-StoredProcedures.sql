@@ -62,3 +62,18 @@ SELECT
 		Salary,
 		dbo.udf_SalaryLevel(Salary) AS SalaryLevel
 FROM Employees
+
+--------------
+
+CREATE OR ALTER PROCEDURE usp_SelectEmployeesBySeniority
+AS 
+(
+	SELECT 
+			FirstName,
+			LastName,
+			HireDate
+	FROM Employees
+	WHERE DATEDIFF(YEAR, HireDate, GETDATE()) > 20
+)
+
+EXEC usp_SelectEmployeesBySeniority
