@@ -10,3 +10,8 @@ BEGIN
 	SET @projectDuration = DATEDIFF(WEEK, @StartDate, @EndDate)
 	RETURN @projectDuration
 END;
+
+SELECT 
+		[Name],
+		dbo.udf_ProjectDurationInWeeks(StartDate, EndDate) AS ProjectDuration
+FROM Projects
