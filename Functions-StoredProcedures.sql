@@ -225,3 +225,4 @@ GO
 -- User-defined functions are used in SQL queries
 SELECT dbo.ufn_IsWordComprised('alim', 'Mila') -- 1
 SELECT dbo.ufn_IsWordComprised('alim', 'Mila!') -- 0
+
