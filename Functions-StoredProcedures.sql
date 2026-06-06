@@ -171,6 +171,8 @@ GO
 CREATE PROCEDURE usp_GetEmployeesSalaryAboveNumber (@minSalary DECIMAL(18,4)) 
 AS
 BEGIN
+		IF @minSalary < 0
+			THROW 50001, 'Min salary is not valid?!', 1;
 		SELECT 
 				FirstName,
 				LastName
@@ -179,3 +181,10 @@ BEGIN
 END
 
 EXEC usp_GetEmployeesSalaryAboveNumber 48100
+
+-- 03
+-- 04
+-- 05
+-- 06
+-- 07
+
