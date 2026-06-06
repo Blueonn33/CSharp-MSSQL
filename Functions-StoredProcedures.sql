@@ -67,13 +67,12 @@ FROM Employees
 
 CREATE OR ALTER PROCEDURE usp_SelectEmployeesBySeniority
 AS 
-(
 	SELECT 
 			FirstName,
 			LastName,
 			HireDate
 	FROM Employees
 	WHERE DATEDIFF(YEAR, HireDate, GETDATE()) > 20
-)
+	ORDER BY HireDate
 
 EXEC usp_SelectEmployeesBySeniority
