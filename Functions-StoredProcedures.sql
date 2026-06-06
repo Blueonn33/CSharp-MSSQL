@@ -77,3 +77,5 @@ AS
 	ORDER BY HireDate
 
 EXEC usp_SelectEmployeesBySeniority
+
+EXEC sp_depends usp_SelectEmployeesBySeniority
