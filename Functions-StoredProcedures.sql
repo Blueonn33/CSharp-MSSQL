@@ -55,3 +55,9 @@ BEGIN
 	END
 	RETURN @level
 END;
+
+SELECT
+		FirstName,
+		LastName,
+		dbo.udf_SalaryLevel(Salary) AS SalaryLevel
+FROM Employees
