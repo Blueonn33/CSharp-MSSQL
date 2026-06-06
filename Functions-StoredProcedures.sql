@@ -129,3 +129,17 @@ SELECT 1/0
 SET @test = @@ERROR
 
 SELECT @test
+
+
+---------------------------------
+
+-- 01
+CREATE PROCEDURE usp_GetEmployeesSalaryAbove35000
+AS
+(
+	SELECT 
+			FirstName,
+			LastName
+	FROM Employees
+	WHERE Salary > 35000
+)
