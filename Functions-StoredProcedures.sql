@@ -183,6 +183,18 @@ END
 EXEC usp_GetEmployeesSalaryAboveNumber 48100
 
 -- 03
+GO   
+
+CREATE OR ALTER PROCEDURE usp_GetTownsStartingWith (@pattern VARCHAR(50)) AS
+BEGIN
+	SELECT [Name]
+	FROM Towns
+	WHERE [Name] LIKE (@pattern + '%')
+END
+
+EXEC usp_GetTownsStartingWith 'b'
+
+GO
 -- 04
 -- 05
 -- 06
