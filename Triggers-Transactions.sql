@@ -117,3 +117,17 @@ BEGIN
 END
 
 GO
+
+-- 05
+GO
+
+CREATE PROCEDURE usp_TransferMoney(@senderId INT, @receiverId INT, @amount DECIMAL(18,4)) AS
+BEGIN
+		IF (@amount > 0)
+		BEGIN
+			EXEC dbo.usp_DepositMoney @receiverId, @amount
+			EXEC dbo.usp_WithdrawMoney @senderId, @amount
+		END	
+END
+
+GO
