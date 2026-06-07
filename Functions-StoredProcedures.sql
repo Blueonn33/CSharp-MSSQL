@@ -195,7 +195,24 @@ END
 EXEC usp_GetTownsStartingWith 'b'
 
 GO
+
 -- 04
+GO
+
+CREATE OR ALTER PROCEDURE usp_GetEmployeesFromTown (@townName VARCHAR(50)) AS
+BEGIN
+	SELECT
+			e.FirstName,
+			e.LastName
+	FROM Employees AS e
+	JOIN Addresses AS a ON e.AddressID = a.AddressID
+	JOIN Towns AS t ON t.TownID = a.TownID
+	WHERE t.[Name] = @townName
+END
+
+EXEC usp_GetEmployeesFromTown 'Sofia'
+
+GO
 -- 05
 -- 06
 -- 07
