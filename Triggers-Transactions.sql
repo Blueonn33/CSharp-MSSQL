@@ -131,3 +131,37 @@ BEGIN
 END
 
 GO
+
+-- 06
+GO
+
+CREATE OR ALTER TRIGGER tr_UserIsBelowMinLevel
+ON UserGameItems
+AFTER INSERT
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN Items it ON it.Id = i.ItemId
+        JOIN UsersGames ug ON ug.Id = i.UserGameId
+        WHERE it.MinLevel > ug.Level
+    )
+    BEGIN
+        THROW 50001, 'You cannot buy an item above your level.', 1;
+    END
+END
+
+GO
+
+GO
+
+UPDATE ug
+SET ug.Cash += 50000
+FROM UsersGames ug
+JOIN Users u ON ug.UserId = u.Id
+JOIN Games g ON ug.GameId = g.Id
+WHERE u.Username IN ('baleremuda', 'loosenoise', 'inguinalself', 'buildingdeltoid', 'monoxidecos')
+  AND g.Name = 'Bali';
+
+GO
