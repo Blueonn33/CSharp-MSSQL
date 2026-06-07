@@ -30,6 +30,30 @@ CREATE TABLE Logs
 )
 
 INSERT INTO Logs (AccountId, OldSum, NewSum)
-VALUES (1, 123.12, 113.12)
+VALUES (2, 123.12, 113.12)
 
-CREATE OR ALTER TRIGGER
+SELECT * FROM Logs
+SELECT * FROM Accounts
+
+ALTER TABLE Logs
+ALTER COLUMN NewSum DECIMAL(10,2)
+
+GO
+
+CREATE OR ALTER TRIGGER tr_LogChanges
+ON Accounts
+AFTER UPDATE
+AS
+BEGIN
+		INSERT INTO Logs (AccountId, OldSum, NewSum)
+		SELECT i.Id, d.Balance, i.Balance
+		FROM inserted i
+		JOIN deleted d ON d.Id = i.Id
+		WHERE d.Balance != i.Balance
+END
+
+UPDATE Accounts
+SET Balance += 17.17
+WHERE Id = 1
+
+GO
