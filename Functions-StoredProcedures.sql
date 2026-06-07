@@ -287,3 +287,18 @@ END
 GO
 
 EXEC dbo.usp_DeleteEmployeesFromDepartment 1
+
+-- 13
+GO
+
+SELECT SUM(Cash) AS SumCash
+FROM (
+		SELECT g.[Name], 
+			   ug.Cash,
+			   ROW_NUMBER() OVER(ORDER BY ug.Cash DESC) AS RowNumber
+		FROM UsersGames AS ug
+		INNER JOIN Games AS g
+		ON ug.GameId = g.Id
+		WHERE g.[Name] = 'Love in a mist'
+) AS RowNumberingSubQuery
+WHERE RowNumber % 2 != 0
