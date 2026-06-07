@@ -21,6 +21,7 @@ WHERE Id IN (SELECT Id FROM deleted)
 
 GO
 
+-- 01
 CREATE TABLE Logs
 (
 	LogId INT PRIMARY KEY IDENTITY (1, 1),
@@ -57,3 +58,12 @@ SET Balance += 17.17
 WHERE Id = 1
 
 GO
+
+-- 02
+CREATE TABLE NotificationEmails
+(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	Recipient INT FOREIGN KEY REFERENCES Accounts(Id),
+	[Subject] VARCHAR(50) NOT NULL,
+	[Body] VARCHAR(200) NOT NULL
+);
