@@ -371,6 +371,42 @@ EXEC usp_GetHoldersFullName
 
 GO
 
+-- 10
+GO
+
+CREATE OR ALTER PROCEDURE usp_GetHoldersWithBalanceHigherThan (@threshold DECIMAL) AS
+BEGIN
+    SELECT 
+        d.FirstName AS [First Name],
+        d.LastName AS [Last Name]
+    FROM (
+        SELECT 
+            ah.Id,
+            ah.FirstName,
+            ah.LastName,
+            SUM(a.Balance) AS TotalBalance
+        FROM AccountHolders AS ah
+        JOIN Accounts AS a ON ah.Id = a.AccountHolderId
+        GROUP BY ah.Id, ah.FirstName, ah.LastName
+        HAVING SUM(a.Balance) > @threshold
+    ) AS d
+    ORDER BY d.FirstName, d.LastName
+END
+
+
+SELECT
+		FirstName,
+		LastName,
+		SUM(Balance)
+FROM AccountHolders AS ah
+JOIN Accounts AS a ON ah.Id = a.AccountHolderId
+GROUP BY FirstName, LastName
+HAVING SUM(Balance) > 40000
+
+EXEC usp_GetHoldersWithBalanceHigherThan 30000
+
+GO
+
 -- 13
 GO
 
