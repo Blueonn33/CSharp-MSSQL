@@ -357,6 +357,20 @@ GO
 
 EXEC dbo.usp_DeleteEmployeesFromDepartment 1
 
+-- 09
+GO
+
+CREATE PROCEDURE usp_GetHoldersFullName AS
+BEGIN
+		SELECT
+				CONCAT_WS(' ', FirstName, LastName) AS [Full Name]
+		FROM AccountHolders
+END
+
+EXEC usp_GetHoldersFullName 
+
+GO
+
 -- 13
 GO
 
