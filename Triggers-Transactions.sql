@@ -67,3 +67,24 @@ CREATE TABLE NotificationEmails
 	[Subject] VARCHAR(50) NOT NULL,
 	[Body] VARCHAR(200) NOT NULL
 );
+
+GO
+
+CREATE OR ALTER TRIGGER tr_NotificationEmail
+ON Logs
+AFTER INSERT
+AS
+BEGIN
+		INSERT INTO NotificationEmails (Recipient, [Subject], [Body])
+		SELECT i.AccountId, 
+			   'Balance change for account: ' + CAST(i.AccountId AS varchar(10)),
+			   'On ' + CONVERT(varchar(30), GETDATE()) +
+				' your balance was changed from ' + 
+				CAST(i.OldSum AS varchar(20)) + 
+				' to ' + 
+				CAST(i.NewSum AS varchar(20)) + '.'
+		FROM inserted i
+END
+
+GO
+
