@@ -187,7 +187,6 @@ EXEC usp_GetEmployeesSalaryAboveNumber 48100
 -- 05
 -- 06
 -- 07
-
 GO
 
 CREATE FUNCTION ufn_IsWordComprised (@setOfLetters VARCHAR(50) = '', @word VARCHAR(100) = '')
@@ -226,3 +225,65 @@ GO
 SELECT dbo.ufn_IsWordComprised('alim', 'Mila') -- 1
 SELECT dbo.ufn_IsWordComprised('alim', 'Mila!') -- 0
 
+-- 08
+GO
+
+CREATE PROCEDURE usp_DeleteEmployeesFromDepartment (@departmentId INT) AS
+BEGIN
+		-- 1. Find all Ids of the Employees to be deleted
+		WITH EmployeesToDeleteId_CTE
+		AS (
+			SELECT EmployeeID
+			FROM Employees
+			WHERE DepartmentID = @departmentId
+		)
+
+		-- 2.Delete all mapping records from EmployeesProjects
+		DELETE 
+		FROM EmployeesProjects
+		WHERE EmployeeID IN (
+								 SELECT EmployeeID 
+								 FROM EmployeesToDeleteId_CTE
+							)
+		-- 3. Disconnect relation from Department to Employee for all Employees to be deleted
+		-- 3.1. Alter the column type of FK ManagerID to be nullable INT
+		ALTER TABLE Departments
+		ALTER COLUMN ManagerID INT
+
+		-- 3.2. Set Department.ManagerID = NULL
+		UPDATE Departments
+		SET ManagerID = NULL
+		WHERE ManagerID IN (
+								 SELECT EmployeeID 
+								 FROM Employees
+								 WHERE DepartmentID = @departmentId
+								 --FROM EmployeesToDeleteId_CTE
+							)
+		-- 4. Disconnect relation from Employee to Manager for all Managers to be deleted
+		-- 4.1. Set the ManagerID = NULL for all Employees whose Manager is to be deleted
+		UPDATE Employees
+		SET ManagerID = NULL
+		WHERE ManagerID IN (
+								 SELECT EmployeeID 
+								 FROM Employees
+								 WHERE DepartmentID = @departmentId
+							)
+		-- 5. Delete all employees from the given @departmentId
+		DELETE 
+		FROM Employees
+		WHERE DepartmentID = @departmentId
+
+		-- 6. Delete the department itself, since no Employees are working there no more
+		DELETE
+		FROM Departments
+		WHERE DepartmentID = @departmentId
+
+		-- 7. Select count of employees in this department (0)
+		SELECT COUNT(*)
+		FROM Employees
+		WHERE DepartmentID = @departmentId
+END
+
+GO
+
+EXEC dbo.usp_DeleteEmployeesFromDepartment 1
