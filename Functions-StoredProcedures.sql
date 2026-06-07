@@ -240,6 +240,21 @@ FROM Employees
 GO
 
 -- 06
+GO
+
+CREATE OR ALTER PROCEDURE usp_EmployeesBySalaryLevel(@level VARCHAR(10)) AS
+BEGIN
+		SELECT	
+				FirstName,
+				LastName
+		FROM Employees
+		WHERE @level = dbo.ufn_GetSalaryLevel(Salary)
+END
+
+EXEC usp_EmployeesBySalaryLevel 'high'
+
+GO
+
 -- 07
 GO
 
