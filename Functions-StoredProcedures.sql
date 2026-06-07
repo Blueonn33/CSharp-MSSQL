@@ -374,24 +374,19 @@ GO
 -- 10
 GO
 
-CREATE OR ALTER PROCEDURE usp_GetHoldersWithBalanceHigherThan (@threshold DECIMAL) AS
+CREATE OR ALTER PROCEDURE usp_GetHoldersWithBalanceHigherThan (@threshold DECIMAL(18,4))
+AS
 BEGIN
     SELECT 
-        d.FirstName AS [First Name],
-        d.LastName AS [Last Name]
-    FROM (
-        SELECT 
-            ah.Id,
-            ah.FirstName,
-            ah.LastName,
-            SUM(a.Balance) AS TotalBalance
-        FROM AccountHolders AS ah
-        JOIN Accounts AS a ON ah.Id = a.AccountHolderId
-        GROUP BY ah.Id, ah.FirstName, ah.LastName
-        HAVING SUM(a.Balance) > @threshold
-    ) AS d
-    ORDER BY d.FirstName, d.LastName
+        ah.FirstName AS [First Name],
+        ah.LastName AS [Last Name]
+    FROM AccountHolders AS ah
+    JOIN Accounts AS a ON ah.Id = a.AccountHolderId
+    GROUP BY ah.Id, ah.FirstName, ah.LastName
+    HAVING SUM(a.Balance) > @threshold
+    ORDER BY ah.FirstName, ah.LastName
 END
+
 
 
 SELECT
