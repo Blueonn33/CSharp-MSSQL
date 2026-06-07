@@ -102,3 +102,18 @@ BEGIN
 END
 
 GO
+
+-- 04
+GO
+
+CREATE PROCEDURE usp_WithdrawMoney (@accountId INT, @moneyAmount DECIMAL(18,4)) AS
+BEGIN
+		IF (@moneyAmount >= 0)
+		BEGIN
+			UPDATE Accounts
+			SET Balance -= @moneyAmount
+			WHERE Id = @accountId
+		END
+END
+
+GO
