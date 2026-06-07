@@ -303,7 +303,7 @@ RETURN (
 			FROM UsersGames AS ug
 			INNER JOIN Games AS g
 			ON ug.GameId = g.Id
-			WHERE g.[Name] = 'Love in a mist'
+			WHERE g.[Name] = @gameName
 	) AS RowNumberingSubQuery
 	WHERE RowNumber % 2 != 0
 )
