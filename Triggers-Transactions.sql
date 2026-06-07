@@ -1,0 +1,7 @@
+SELECT * FROM 
+Accounts
+
+BEGIN TRANSACTION
+DELETE FROM Accounts Where Id = 6
+
+ROLLBACK
