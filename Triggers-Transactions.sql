@@ -165,3 +165,16 @@ WHERE u.Username IN ('baleremuda', 'loosenoise', 'inguinalself', 'buildingdeltoi
   AND g.Name = 'Bali';
 
 GO
+
+INSERT INTO UserGameItems (ItemId, UserGameId)
+SELECT it.Id, ug.Id
+FROM Items it
+CROSS JOIN UsersGames ug
+JOIN Users u ON ug.UserId = u.Id
+JOIN Games g ON ug.GameId = g.Id
+WHERE u.Username IN ('baleremuda', 'loosenoise', 'inguinalself', 'buildingdeltoid', 'monoxidecos')
+  AND g.Name = 'Bali'
+  AND (
+        it.Id BETWEEN 251 AND 299
+        OR it.Id BETWEEN 501 AND 539
+      );
