@@ -1,3 +1,9 @@
- CREATE DATABASE LibraryDB_ExamPrep
- USE LibraryDB_ExamPrep
+CREATE DATABASE LibraryDB_ExamPrep
+USE LibraryDB_ExamPrep
 
+-- 01
+CREATE TABLE Genres
+(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	[Name] NVARCHAR(30) NOT NULL,
+);
