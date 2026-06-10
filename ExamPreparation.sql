@@ -96,3 +96,15 @@ SET Website = CONCAT('www.', LOWER(REPLACE([Name], ' ', '')), '.com')
 FROM Contacts AS c
 JOIN Authors AS a ON a.ContactId = c.Id
 WHERE Website IS NULL
+
+-- DELETE
+
+DELETE 
+	FROM LibrariesBooks
+WHERE BookId IN 
+(
+	SELECT b.Id 
+	FROM Books b
+	JOIN Authors a ON b.AuthorId = a.Id
+	WHERE a.[Name] = 'Alex Michaelides'
+)
