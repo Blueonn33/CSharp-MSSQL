@@ -108,3 +108,12 @@ WHERE BookId IN
 	JOIN Authors a ON b.AuthorId = a.Id
 	WHERE a.[Name] = 'Alex Michaelides'
 )
+
+DELETE
+FROM Books
+WHERE AuthorId IN 
+(
+	SELECT Id
+	FROM Authors
+	WHERE [Name] = 'Alex Michaelides'
+)
