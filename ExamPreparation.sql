@@ -130,7 +130,6 @@ WHERE [Name] = 'Alex Michaelides'
 -- SECTION 3 --
 
 -- 05
-
 SELECT 
 		Title AS [Book Title],
 		ISBN,
@@ -139,4 +138,12 @@ FROM Books
 ORDER BY YearPublished DESC, Title ASC
 
 -- 06
-
+SELECT 
+		b.Id,
+		b.Title,
+		b.ISBN,
+		g.[Name]
+FROM Books b
+JOIN Genres g ON b.GenreId = g.Id
+WHERE g.[Name] IN ('Historical Fiction', 'Biography')
+ORDER BY g.[Name], b.Title
