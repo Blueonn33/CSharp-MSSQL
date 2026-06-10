@@ -121,3 +121,6 @@ WHERE AuthorId IN
 DELETE 
 FROM Authors
 WHERE [Name] = 'Alex Michaelides'
+
+---------------------------------
+
