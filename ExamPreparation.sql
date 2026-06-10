@@ -117,3 +117,7 @@ WHERE AuthorId IN
 	FROM Authors
 	WHERE [Name] = 'Alex Michaelides'
 )
+
+DELETE 
+FROM Authors
+WHERE [Name] = 'Alex Michaelides'
