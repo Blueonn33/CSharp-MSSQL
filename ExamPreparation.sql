@@ -1,6 +1,9 @@
 CREATE DATABASE LibraryDB_ExamPrep
 USE LibraryDB_ExamPrep
 
+---------------------------------
+-- SECTION 1
+
 -- 01
 CREATE TABLE Genres
 (
@@ -49,6 +52,7 @@ CREATE TABLE LibrariesBooks
 )
 
 -----------------------------------
+-- SECTION 2
 
 -- INSERT
 
@@ -123,6 +127,7 @@ FROM Authors
 WHERE [Name] = 'Alex Michaelides'
 
 ---------------------------------
+-- SECTION 3 --
 
 -- 05
 
@@ -132,3 +137,6 @@ SELECT
 		YearPublished AS YearReleased
 FROM Books
 ORDER BY YearPublished DESC, Title ASC
+
+-- 06
+
