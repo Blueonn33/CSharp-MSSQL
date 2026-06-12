@@ -208,3 +208,5 @@ JOIN Contacts AS c ON l.ContactId = c.Id
 JOIN Authors AS a ON a.Id = b.AuthorId
 WHERE g.[Name] = 'Fiction' AND c.PostAddress LIKE '%Denver%'
 ORDER BY b.Title ASC
+
+-- 11
