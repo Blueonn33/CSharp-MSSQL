@@ -147,3 +147,27 @@ FROM Books b
 JOIN Genres g ON b.GenreId = g.Id
 WHERE g.[Name] IN ('Historical Fiction', 'Biography')
 ORDER BY g.[Name], b.Title
+
+-- 07
+WITH MysteryBooksLibraryIdsCte
+AS
+(
+	SELECT l.Id
+	FROM Libraries AS l
+	JOIN LibrariesBooks AS lb ON lb.LibraryId = l.Id
+	JOIN Books AS b ON lb.BookId = b.Id
+	JOIN Genres AS g ON b.GenreId = g.Id
+	WHERE g.[Name] = 'Mystery'     
+)
+
+SELECT 
+		l.[Name] AS [Library],
+		c.Email
+FROM Libraries l
+JOIN Contacts c ON l.ContactId = c.Id
+WHERE l.Id NOT IN 
+(
+	SELECT Id
+	FROM MysteryBooksLibraryIdsCte
+)
+ORDER BY l.[Name] ASC
