@@ -171,3 +171,11 @@ WHERE l.Id NOT IN
 	FROM MysteryBooksLibraryIdsCte
 )
 ORDER BY l.[Name] ASC
+
+-- 08
+SELECT *
+FROM Books b
+JOIN Genres g ON b.GenreId = g.Id
+WHERE (b.YearPublished > 2000 AND b.Title LIKE '%a%')
+	  OR
+	  (b.YearPublished > 1950 AND g.[Name] LIKE '%Fantasy%')
