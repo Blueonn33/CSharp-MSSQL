@@ -178,3 +178,46 @@ WHERE u.Username IN ('baleremuda', 'loosenoise', 'inguinalself', 'buildingdeltoi
         it.Id BETWEEN 251 AND 299
         OR it.Id BETWEEN 501 AND 539
       );
+
+-- 08
+GO
+CREATE OR ALTER PROCEDURE usp_AssignProject(@employeeId INT, @projectId INT)
+AS
+BEGIN
+    BEGIN TRANSACTION
+
+    IF (
+        SELECT COUNT(*)
+        FROM EmployeesProjects
+        WHERE EmployeeID = @employeeId
+    ) > 3
+    BEGIN
+        ROLLBACK
+        THROW 50001, 'The employee has too many projects!', 1;
+    END
+
+    INSERT INTO EmployeesProjects (EmployeeID, ProjectID)
+    VALUES (@employeeId, @projectId)
+
+    COMMIT
+END
+
+-- Deleted_Employees(EmployeeId PK, FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary) 
+
+CREATE TABLE Deleted_Employees
+(
+	EmployeeId INT PRIMARY KEY,
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	MiddleName NVARCHAR(50) NOT NULL,
+	JobTitle NVARCHAR(50) NOT NULL,
+	DepartmentId INT FOREIGN KEY REFERENCES Departments(DepartmentId),
+	Salary DECIMAL NOT NULL
+)
+
+CREATE OR ALTER TRIGGER tr_EmployeesSoftDelete
+ON Employees
+AFTER DELETE 
+AS
+INSERT INTO Deleted_Employees (EmployeeId, FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary) 
+SELECT EmployeeId, FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary from deleted
