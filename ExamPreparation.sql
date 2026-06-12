@@ -257,3 +257,6 @@ CREATE OR ALTER PROCEDURE usp_SearchBookByGenre(
 		END
 
 GO
+
+EXEC usp_SearchBookByGenre 'Fantasy'
+EXEC usp_SearchBookByGenre 'Fantasy', 'Denver'
