@@ -210,3 +210,23 @@ WHERE g.[Name] = 'Fiction' AND c.PostAddress LIKE '%Denver%'
 ORDER BY b.Title ASC
 
 -- 11
+SELECT COUNT(b.Id) AS BooksCount
+FROM LibrariesBooks AS lb
+JOIN Books AS b ON lb.BookId = b.Id
+JOIN Authors AS a ON a.Id = b.AuthorId
+WHERE a.[Name] = 'J.K. Rowling'
+
+GO
+CREATE OR ALTER FUNCTION udf_AuthorsWithBooks(@name NVARCHAR(100))
+	RETURNS INT
+			 AS
+		  BEGIN
+				RETURN 
+				(
+						SELECT COUNT(b.Id) AS BooksCount
+						FROM LibrariesBooks AS lb
+						JOIN Books AS b ON lb.BookId = b.Id
+						JOIN Authors AS a ON a.Id = b.AuthorId
+						WHERE a.[Name] = @name
+				)
+			END
