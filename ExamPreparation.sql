@@ -230,3 +230,30 @@ CREATE OR ALTER FUNCTION udf_AuthorsWithBooks(@name NVARCHAR(100))
 						WHERE a.[Name] = @name
 				)
 			END
+
+-- 12
+GO
+CREATE OR ALTER PROCEDURE usp_SearchBookByGenre(
+	@genreName NVARCHAR(30),
+	@city NVARCHAR(100) = NULL
+) AS
+		BEGIN
+			SELECT
+					b.Title,
+					b.YearPublished AS [Year],
+					b.ISBN,
+					a.[Name] AS Author,
+					g.[Name] AS Genre
+			FROM Books AS b
+			JOIN Genres AS g ON b.GenreId = g.Id
+			JOIN Authors AS a ON b.AuthorId = a.Id
+			LEFT JOIN LibrariesBooks AS lb ON lb.BookId = b.Id
+			LEFT JOIN Libraries AS l ON lb.LibraryId = l.Id
+			LEFT JOIN Contacts AS c ON l.ContactId = c.Id
+			WHERE (g.[Name] = @genreName) AND (@city IS NULL OR CHARINDEX(@city, c.PostAddress) > 0)
+			ORDER BY 
+					 Title ASC, 
+					 [Year] DESC
+		END
+
+GO
