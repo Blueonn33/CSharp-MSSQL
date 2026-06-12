@@ -183,3 +183,12 @@ WHERE (b.YearPublished > 2000 AND b.Title LIKE '%a%')
 	  OR
 	  (b.YearPublished < 1950 AND g.[Name] LIKE '%Fantasy%')
 ORDER BY b.Title ASC, b.YearPublished DESC
+
+-- 09
+SELECT 
+		a.[Name] AS Author,
+		c.Email,
+		c.PostAddress AS [Address]
+FROM Authors a
+JOIN Contacts c ON c.Id = a.ContactId
+WHERE c.PostAddress LIKE '%UK%'
