@@ -192,3 +192,4 @@ SELECT
 FROM Authors a
 JOIN Contacts c ON c.Id = a.ContactId
 WHERE c.PostAddress LIKE '%UK%'
+ORDER BY a.[Name]
