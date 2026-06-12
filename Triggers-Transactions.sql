@@ -181,26 +181,32 @@ WHERE u.Username IN ('baleremuda', 'loosenoise', 'inguinalself', 'buildingdeltoi
 
 -- 08
 GO
-CREATE OR ALTER PROCEDURE usp_AssignProject(@employeeId INT, @projectId INT)
+CREATE OR ALTER PROCEDURE usp_AssignProject
+    @employeeId INT,
+    @projectId INT
 AS
 BEGIN
-    BEGIN TRANSACTION
+    BEGIN TRANSACTION;
 
-    IF (
+    DECLARE @projectCount INT =
+    (
         SELECT COUNT(*)
         FROM EmployeesProjects
         WHERE EmployeeID = @employeeId
-    ) > 3
+    );
+
+    IF (@projectCount >= 3)
     BEGIN
-        ROLLBACK
+        ROLLBACK;
         THROW 50001, 'The employee has too many projects!', 1;
     END
 
     INSERT INTO EmployeesProjects (EmployeeID, ProjectID)
-    VALUES (@employeeId, @projectId)
+    VALUES (@employeeId, @projectId);
 
-    COMMIT
+    COMMIT;
 END
+
 
 -- Deleted_Employees(EmployeeId PK, FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary) 
 
@@ -215,9 +221,10 @@ CREATE TABLE Deleted_Employees
 	Salary DECIMAL NOT NULL
 )
 
+GO
 CREATE OR ALTER TRIGGER tr_EmployeesSoftDelete
 ON Employees
 AFTER DELETE 
 AS
-INSERT INTO Deleted_Employees (EmployeeId, FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary) 
-SELECT EmployeeId, FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary from deleted
+INSERT INTO Deleted_Employees (FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary) 
+SELECT FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary from deleted
