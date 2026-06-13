@@ -157,3 +157,16 @@ JOIN PlayersTeams AS pt ON pt.PlayerId = p.Id
 JOIN Teams AS t ON pt.TeamId = t.Id
 WHERE t.City = 'London'
 ORDER BY p.[Name] ASC
+
+-- 08
+SELECT TOP 10
+				h.[Name] AS HomeTeamName,
+				a.[Name] AS AwayTeamName,
+				l.[Name] AS LeagueName,
+				FORMAT(m.MatchDate, 'yyyy-MM-dd') AS MatchDate
+FROM Matches AS m
+JOIN Teams AS h ON m.HomeTeamId = h.Id
+JOIN Teams AS a ON m.AwayTeamId = a.Id
+JOIN Leagues AS l ON m.LeagueId = l.Id
+WHERE (m.MatchDate BETWEEN '2024-09-01' AND '2024-09-15') AND l.Id % 2 = 0
+ORDER BY m.MatchDate ASC, h.[Name] ASC
