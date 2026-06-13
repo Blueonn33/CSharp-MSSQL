@@ -121,3 +121,7 @@ WHERE PlayerId IN (
 						JOIN Leagues AS l ON l.Id = t.LeagueId
 						WHERE p.[Name] IN ('Luuk de Jong', 'Josip Sutalo') AND l.[Name] = 'Eredivisie'
 				  )
+
+DELETE
+FROM Players
+WHERE [Name] IN ('Luuk de Jong', 'Josip Sutalo')
