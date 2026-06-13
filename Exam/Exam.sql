@@ -170,3 +170,21 @@ JOIN Teams AS a ON m.AwayTeamId = a.Id
 JOIN Leagues AS l ON m.LeagueId = l.Id
 WHERE (m.MatchDate BETWEEN '2024-09-01' AND '2024-09-15') AND l.Id % 2 = 0
 ORDER BY m.MatchDate ASC, h.[Name] ASC
+
+-- 09
+SELECT 
+		Id,
+		[Name],
+		TotalAwayGoals
+FROM (
+		SELECT
+				t.Id,
+				t.[Name],
+				SUM(m.AwayTeamGoals) AS TotalAwayGoals
+		FROM Teams AS t
+		JOIN Matches AS m ON m.AwayTeamId = t.Id
+		JOIN Leagues AS l ON m.LeagueId = l.Id
+		GROUP BY t.Id, t.[Name]
+		HAVING SUM(m.AwayTeamGoals) >= 6
+) AS TotalAwayGoals
+ORDER BY TotalAwayGoals DESC, [Name] ASC
