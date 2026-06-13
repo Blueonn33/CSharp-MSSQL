@@ -345,6 +345,49 @@ UPDATE PlayerStats
 SET Goals = 18
 WHERE PlayerId = (SELECT p.Id FROM Players p WHERE p.Name = 'Alexander Isak');
 
+CREATE OR ALTER FUNCTION udf_LeagueTopScorer(@league NVARCHAR(50)) 
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        PlayerName,
+        TotalGoals
+    FROM
+    (
+        SELECT
+            p.[Name] AS PlayerName,
+            SUM(ps.Goals) AS TotalGoals,
+            DENSE_RANK() OVER (
+                ORDER BY SUM(ps.Goals) DESC
+            ) AS [Rank]
+        FROM Players AS p
+        JOIN PlayerStats AS ps ON ps.PlayerId = p.Id
+        JOIN PlayersTeams AS pt ON pt.PlayerId = p.Id
+        JOIN Teams AS t ON pt.TeamId = t.Id
+        JOIN Leagues AS l ON l.Id = t.LeagueId
+        WHERE l.[Name] = @league
+        GROUP BY p.[Name]
+		ORDER BY PlayerName DESC
+    ) AS Ranking
+    WHERE Ranking.[Rank] = 1
+)
+
+
+-- Update goals for Erling Haaland
+UPDATE PlayerStats
+SET Goals = 18
+WHERE PlayerId = (SELECT p.Id FROM Players p WHERE p.Name = 'Erling Haaland');
+
+-- Update goals for Alexander Isak
+UPDATE PlayerStats
+SET Goals = 18
+WHERE PlayerId = (SELECT p.Id FROM Players p WHERE p.Name = 'Alexander Isak');
+
+
+SELECT *
+FROM dbo.udf_LeagueTopScorer('Premier League');
+
 -- 12
 CREATE OR ALTER PROCEDURE usp_UpdatePlayerStats(@PlayerId INT, @GoalsDelta INT = 0, @AssistsDelta INT = 0)
 AS
