@@ -125,3 +125,6 @@ WHERE PlayerId IN (
 DELETE
 FROM Players
 WHERE [Name] IN ('Luuk de Jong', 'Josip Sutalo')
+
+-----------------------------------
+-- 05
