@@ -58,3 +58,17 @@ CREATE TABLE TeamStats
 )
 
 ----------------------------------
+
+-- 02
+
+INSERT INTO Leagues([Name])
+VALUES ('Eredivisie')
+
+INSERT INTO Teams([Name], City, LeagueId)
+VALUES ('PSV', 'Eindhoven', 6),
+	   ('Ajax', 'Amsterdam', 6)
+
+INSERT INTO Players([Name], Position)
+VALUES ('Luuk de Jong', 'Forward'),
+	   ('Josip Sutalo', 'Defender')
+
