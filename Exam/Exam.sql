@@ -86,3 +86,15 @@ VALUES (2305, 2, 0),
 INSERT INTO TeamStats(TeamId, Wins, Draws, Losses)
 VALUES (97, 15, 1, 3),
 	   (98, 14, 3, 2)
+
+-- 03
+UPDATE PlayerStats 
+SET Goals += 1
+WHERE PlayerId IN (
+				     SELECT p.Id
+					 FROM Players AS p
+					 JOIN PlayersTeams AS pt ON p.Id = pt.PlayerId
+					 JOIN Teams AS t ON t.Id = pt.TeamId
+					 JOIN Leagues AS l ON l.Id = t.LeagueId
+					 WHERE Position = 'Forward' AND l.[Name] = 'La Liga'
+				  )
