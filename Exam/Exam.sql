@@ -114,7 +114,10 @@ WHERE PlayerId IN (
 DELETE 
 FROM PlayersTeams
 WHERE PlayerId IN (
-					SELECT Id
-					FROM Players
-					WHERE [Name] IN ('Luuk de Jong', 'Josip Sutalo')
+						SELECT p.Id
+						FROM Players AS p
+						JOIN PlayersTeams AS pt ON p.Id = pt.PlayerId
+						JOIN Teams AS t ON t.Id = pt.TeamId
+						JOIN Leagues AS l ON l.Id = t.LeagueId
+						WHERE p.[Name] IN ('Luuk de Jong', 'Josip Sutalo') AND l.[Name] = 'Eredivisie'
 				  )
