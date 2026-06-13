@@ -287,3 +287,62 @@ FROM Leagues AS l
 JOIN Matches AS m ON m.LeagueId = l.Id
 GROUP BY l.[Name]
 ORDER BY CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3,2)) + m.AwayTeamGoals), 2) AS DECIMAL(4,2)) DESC
+
+------------------------------------------
+-- 11
+GO
+CREATE OR ALTER FUNCTION udf_LeagueTopScorer (@league NVARCHAR(50)) 
+RETURNS TABLE
+AS
+RETURN
+    SELECT 
+			PlayerName,
+			TotalGoals
+	FROM (
+			SELECT
+					p.[Name] AS PlayerName,
+					SUM(ps.Goals) AS TotalGoals, 
+					DENSE_RANK() OVER (ORDER BY SUM(ps.Goals) DESC) AS [Rank]
+			FROM
+				Players AS p
+				JOIN PlayerStats AS ps ON ps.PlayerId = p.Id
+				JOIN PlayersTeams AS pt ON pt.PlayerId = p.Id
+				JOIN Teams AS t ON pt.TeamId = t.Id
+				JOIN Leagues AS l ON l.Id = t.LeagueId
+			WHERE l.[Name] = @league
+			GROUP BY p.[Name]
+	) AS Ranking
+	WHERE Ranking.[Rank] = 1
+
+SELECT *
+FROM dbo.udf_LeagueTopScorer('Premier League');
+
+SELECT 
+		PlayerName,
+		TotalGoals
+FROM (
+		SELECT
+				p.[Name] AS PlayerName,
+				SUM(ps.Goals) AS TotalGoals, 
+				DENSE_RANK() OVER (ORDER BY SUM(ps.Goals) DESC) AS [Rank]
+		FROM
+			Players AS p
+			JOIN PlayerStats AS ps ON ps.PlayerId = p.Id
+			JOIN PlayersTeams AS pt ON pt.PlayerId = p.Id
+			JOIN Teams AS t ON pt.TeamId = t.Id
+			JOIN Leagues AS l ON l.Id = t.LeagueId
+		GROUP BY p.[Name], l.[Name]
+		HAVING l.[Name] = 'Premier League'
+) AS Ranking
+WHERE Ranking.[Rank] = 1
+ORDER BY TotalGoals DESC, PlayerName DESC
+
+UPDATE PlayerStats
+SET Goals = 18
+WHERE PlayerId = (SELECT p.Id FROM Players p WHERE p.Name = 'Erling Haaland');
+
+UPDATE PlayerStats
+SET Goals = 18
+WHERE PlayerId = (SELECT p.Id FROM Players p WHERE p.Name = 'Alexander Isak');
+
+-- 12
