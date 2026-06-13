@@ -146,3 +146,14 @@ JOIN PlayersTeams AS pt ON pt.PlayerId = p.Id
 JOIN Teams AS t ON pt.TeamId = t.Id
 WHERE p.[Name] LIKE '%Aaron%'
 ORDER BY p.[Name] ASC
+
+-- 07
+SELECT 
+		p.Id,
+		p.[Name],
+		p.[Position]
+FROM Players AS p
+JOIN PlayersTeams AS pt ON pt.PlayerId = p.Id
+JOIN Teams AS t ON pt.TeamId = t.Id
+WHERE t.City = 'London'
+ORDER BY p.[Name] ASC
