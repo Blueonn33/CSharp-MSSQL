@@ -346,3 +346,73 @@ SET Goals = 18
 WHERE PlayerId = (SELECT p.Id FROM Players p WHERE p.Name = 'Alexander Isak');
 
 -- 12
+CREATE OR ALTER PROCEDURE usp_UpdatePlayerStats(@PlayerId INT, @GoalsDelta INT = 0, @AssistsDelta INT = 0)
+AS
+BEGIN
+		IF NOT EXISTS(
+			SELECT TOP 1 PlayerId
+			FROM PlayerStats
+			WHERE @PlayerId IS NULL
+		)
+		BEGIN
+			INSERT INTO PlayerStats (PlayerId, Goals, Assists)
+			VALUES (@PlayerId, @GoalsDelta, @AssistsDelta)
+		END
+		UPDATE PlayerStats
+		SET Goals = 
+					CASE
+						WHEN Goals IS NOT NULL THEN Goals + @GoalsDelta
+						ELSE Goals + 0
+					END,
+			Assists = 
+					CASE
+						WHEN Assists IS NOT NULL THEN Assists + @AssistsDelta
+						ELSE Assists + 0
+					END
+END
+
+EXEC usp_UpdatePlayerStats 51, 2;
+
+SELECT 
+		p.Id,
+		p.[Name],
+		ps.Goals,
+		ps.Assists
+FROM Players AS p
+JOIN PlayerStats AS ps ON ps.PlayerId = p.Id
+WHERE p.Id = 51
+
+SELECT 16 + NULL
+
+SELECT *
+FROM PlayerStats
+WHERE PlayerId = 2443
+
+
+
+CREATE OR ALTER PROCEDURE usp_UpdatePlayerStats(@playerId INT, @goalsDelta INT = NULL, @assistsDelta INT = NULL)
+AS
+BEGIN
+    IF NOT EXISTS (
+        SELECT PlayerId 
+		FROM PlayerStats 
+		WHERE PlayerId = @playerId
+    )
+    BEGIN
+        INSERT INTO PlayerStats (PlayerId, Goals, Assists)
+        VALUES (@playerId, COALESCE(@goalsDelta, 0), COALESCE(@assistsDelta, 0))
+		RETURN
+    END
+    UPDATE PlayerStats
+    SET 
+        Goals = Goals + COALESCE(@goalsDelta, 0),
+        Assists = Assists + COALESCE(@assistsDelta, 0)
+    WHERE PlayerId = @playerId
+END
+
+EXEC usp_UpdatePlayerStats 7, 1, 2;
+
+SELECT p.Id, p.Name, ps.Goals, ps.Assists
+FROM dbo.Players p
+JOIN dbo.PlayerStats ps ON ps.PlayerId = p.Id
+WHERE p.Id = 7;
