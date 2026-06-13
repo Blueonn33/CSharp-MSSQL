@@ -42,5 +42,8 @@ CREATE TABLE PlayersTeams
 
 CREATE TABLE PlayerStats
 (
-
+	PlayerId INT FOREIGN KEY REFERENCES Players(Id),
+	Goals INT NOT NULL DEFAULT 0,
+	Assists INT NOT NULL DEFAULT 0
 )
+
