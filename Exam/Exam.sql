@@ -188,3 +188,102 @@ FROM (
 		HAVING SUM(m.AwayTeamGoals) >= 6
 ) AS TotalAwayGoals
 ORDER BY TotalAwayGoals DESC, [Name] ASC
+
+-- 10
+SELECT
+		l.[Name] AS LeagueName,
+		SELECT AvgScoringRate
+		FROM (
+			IF (
+				RIGHT(CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS NVARCHAR(3)), 1) = 0
+			)
+			BEGIN
+				CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (3,1))
+			END
+			CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (3,2)) AS AvgScoringRate
+		) AS AvgScoringRate
+FROM Leagues AS l
+JOIN Matches AS m ON m.LeagueId = l.Id
+GROUP BY l.[Name]
+ORDER BY AvgScoringRate DESC
+
+
+SELECT
+		l.[Name] AS LeagueName,
+		CASE
+			WHEN RIGHT(CAST(AVG(m.HomeTeamGoals + m.AwayTeamGoals), 2) AS VARCHAR(3)), 1) = '0'
+				THEN CAST(AVG(m.HomeTeamGoals + m.AwayTeamGoals) AS DECIMAL (3,1))
+			ELSE CAST(AVG(m.HomeTeamGoals + m.AwayTeamGoals) AS DECIMAL (3,2))
+		END AS AvgScoringRate
+FROM Leagues AS l
+JOIN Matches AS m ON m.LeagueId = l.Id
+GROUP BY l.[Name]
+ORDER BY AvgScoringRate DESC
+
+SELECT
+    l.[Name] AS LeagueName,
+    CASE 
+        WHEN RIGHT(CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL (3, 2)) + m.AwayTeamGoals), 2) AS VARCHAR(10)), 1) = '0'
+            THEN CAST(ROUND(AVG(m.HomeTeamGoals + m.AwayTeamGoals), 1) AS DECIMAL(3,1))
+        ELSE CAST(ROUND(AVG(m.HomeTeamGoals + m.AwayTeamGoals), 2) AS DECIMAL(3,2))
+    END AS AvgScoringRate
+FROM Leagues AS l
+JOIN Matches AS m ON m.LeagueId = l.Id
+GROUP BY l.[Name]
+ORDER BY AvgScoringRate DESC;
+
+SELECT
+		l.[Name] AS LeagueName,
+		RIGHT(CAST(CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (3,2)) AS VARCHAR(4)), 1) AS Test,
+		CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (2,1)) AS Test1,
+		CASE
+			WHEN RIGHT(CAST(CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (3,2)) AS VARCHAR(4)), 1) = '0'
+				THEN CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (2,1))
+		ELSE
+			CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (3,2))
+		END AS AvgScoringRate
+FROM Leagues AS l
+JOIN Matches AS m ON m.LeagueId = l.Id
+GROUP BY l.[Name]
+ORDER BY AvgScoringRate DESC
+
+
+SELECT
+		l.[Name] AS LeagueName,
+		CASE
+			WHEN RIGHT(CAST(CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (3,2)) AS VARCHAR(4)), 1) = '0'
+				THEN SUBSTRING(CAST(CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (3,1)) AS VARCHAR(3)), 1, 3)
+		ELSE
+			CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3, 2)) + m.AwayTeamGoals), 2) AS DECIMAL (3,2))
+		END AS AvgScoringRate
+FROM Leagues AS l
+JOIN Matches AS m ON m.LeagueId = l.Id
+GROUP BY l.[Name]
+ORDER BY AvgScoringRate DESC
+
+SELECT
+    l.[Name] AS LeagueName,
+    CASE
+        WHEN ROUND(AVG(m.HomeTeamGoals + m.AwayTeamGoals * 1.0), 2)
+             = ROUND(AVG(m.HomeTeamGoals + m.AwayTeamGoals * 1.0), 1)
+        THEN CAST(ROUND(AVG(m.HomeTeamGoals + m.AwayTeamGoals * 1.0), 1) AS VARCHAR(10))
+        ELSE CAST(ROUND(AVG(m.HomeTeamGoals + m.AwayTeamGoals * 1.0), 2) AS VARCHAR(10))
+    END AS AvgScoringRate
+FROM Leagues AS l
+JOIN Matches AS m ON m.LeagueId = l.Id
+GROUP BY l.[Name]
+ORDER BY ROUND(AVG(m.HomeTeamGoals + m.AwayTeamGoals * 1.0), 2) DESC;
+
+
+SELECT
+		l.[Name] AS LeagueName,
+		CASE
+			WHEN RIGHT(CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3,2)) + m.AwayTeamGoals), 2) AS VARCHAR(10)), 1) = '0'
+				THEN RTRIM(REPLACE(CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3,2)) + m.AwayTeamGoals), 2) AS VARCHAR(10)), '0', ''))
+			ELSE
+				CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3,2)) + m.AwayTeamGoals), 2) AS VARCHAR(10))
+		END AS AvgScoringRate
+FROM Leagues AS l
+JOIN Matches AS m ON m.LeagueId = l.Id
+GROUP BY l.[Name]
+ORDER BY CAST(ROUND(AVG(CAST(m.HomeTeamGoals AS DECIMAL(3,2)) + m.AwayTeamGoals), 2) AS DECIMAL(4,2)) DESC
