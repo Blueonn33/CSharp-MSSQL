@@ -56,3 +56,5 @@ CREATE TABLE TeamStats
 	Draws INT NOT NULL DEFAULT 0,
 	Losses INT NOT NULL DEFAULT 0,
 )
+
+----------------------------------
