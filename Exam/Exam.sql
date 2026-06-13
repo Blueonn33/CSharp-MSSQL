@@ -136,3 +136,13 @@ SELECT
 FROM Matches
 WHERE (HomeTeamGoals + AwayTeamGoals) >= 5
 ORDER BY TotalGoals DESC, MatchDate ASC
+
+-- 06
+SELECT 
+		p.[Name],
+		t.City
+FROM Players AS p
+JOIN PlayersTeams AS pt ON pt.PlayerId = p.Id
+JOIN Teams AS t ON pt.TeamId = t.Id
+WHERE p.[Name] LIKE '%Aaron%'
+ORDER BY p.[Name] ASC
